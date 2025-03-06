@@ -1,0 +1,26 @@
+/* For WebKit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+    width: 12px;               /* Vertical scrollbar width */
+    height: 12px;              /* Horizontal scrollbar height */
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;        /* Track color */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;           /* Thumb color */
+    border-radius: 10px;
+    border: 3px solid #f1f1f1;  /* Creates padding effect */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;           /* Hover color */
+}
+
+/* For Firefox */
+* {
+    scrollbar-width: thin;          /* "auto" or "thin" */
+    scrollbar-color: #888 #f1f1f1;  /* thumb and track color */
+}

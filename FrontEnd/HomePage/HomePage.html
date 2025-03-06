@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Laptop World</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="HomePage.css" />
+    <link rel="stylesheet" href="../CommonUtilityFunctions/style.css" />
+
+  </head>
+  <body>
+    <section class="hero-section">
+      <!-- Home Icon -->
+      <a href="./HomePage.html" class="home-icon">
+        <i class="fas fa-home"></i>
+      </a>
+
+      <video id="background-video" autoplay loop muted>
+        <!-- <source
+        src="https://videos.pexels.com/video-files/3163534/3163534-uhd_2560_1440_30fps.mp4"
+                  type="video/mp4"
+        /> -->
+      </video>
+
+      <div class="typing-container">
+        <h1 class="typing-text">Welcome To The Laptop World!</h1>
+      </div>
+
+      <div class="cta-buttons">
+        <button class="cta-button left" onclick="navigateTo(`../SearchPage/SearchPage.html`)">Explore Site</button>
+        <button class="cta-button right" onclick="smoothScroll()">
+          Our Team
+        </button>
+      </div>
+    </section>
+
+    <section class="team-section" id="teamSection">
+        <h1 class="team-title">Our Team</h1>
+
+      <div class="team-container">
+        <div class="team-row">
+          <div class="team-member">
+            <div class="member-image">
+              <img
+                src="C:\Users\Admin\Desktop\ACC Project\FrontEnd\Resources\Images\om siddhapura.jpeg"
+                alt="Team Member"
+              />
+            </div>
+            <h3 class="member-name">Om Siddhapura</h3>
+            <h1 class="member-number">110187008</h1>
+
+          </div>
+          <div class="team-member">
+            <div class="member-image">
+              <img
+                src="C:\Users\Admin\Desktop\ACC Project\FrontEnd\Resources\Images\om siddhapura.jpeg"
+                alt="Team Member"
+              />
+            </div>
+            <h3 class="member-name">Darshan Domadiya</h3>
+            <h1 class="member-number">110187008</h1>
+
+          </div>
+          <div class="team-member">
+            <div class="member-image">
+              <img
+                src="C:\Users\Admin\Desktop\ACC Project\FrontEnd\Resources\Images\Mit Gurrati.jpg"
+                alt="Team Member"
+              />
+            </div>
+            <h3 class="member-name">Mit Gujarati</h3>
+            <h1 class="member-number">110190451</h1>
+
+          </div>
+        </div>
+        <div class="team-row">
+          <div class="team-member">
+            <div class="member-image">
+              <img
+                src="C:\Users\Admin\Desktop\ACC Project\FrontEnd\Resources\Images\Yash Kikani.png"
+                alt="Team Member"
+              />
+            </div>
+            <h3 class="member-name">Yash Kikani</h3>
+            <h1 class="member-number">110187008</h1>
+
+          </div>
+          <div class="team-member">
+            <div class="member-image">
+              <img
+                src="C:\Users\Admin\Desktop\ACC Project\FrontEnd\Resources\Images\Jainil Patel.jpg"
+                alt="Team Member"
+              />
+            </div>
+            <h3 class="member-name">Jainil Patel</h3>
+            <h1 class="member-number">110190585</h1>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="HomePage.js" defer></script>
+    <script src="../CommonUtilityFunctions/script.js" defer></script>
+
+  </body>
+</html>

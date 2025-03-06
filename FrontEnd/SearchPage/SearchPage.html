@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Search Page</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="SearchPage.css" />
+    <link rel="stylesheet" href="../NotificationBar/Notification.css" />
+    <link rel="stylesheet" href="../CommonUtilityFunctions/style.css" />
+    <link rel="stylesheet" href="../ProgressContainer/ProgressBar.css" />
+  </head>
+  <body>
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <!-- Home Icon -->
+    <a href="../HomePage/HomePage.html" class="home-icon">
+      <i class="fas fa-home"></i>
+    </a>
+
+    <!-- Search Container -->
+    <div class="search-container">
+      <div class="search-bar">
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Search For Laptops"
+        />
+        <i class="fas fa-search search-icon"></i>
+        <div class="suggestions-dropdown"></div>
+      </div>
+    </div>
+    <div class="frequency-section">
+      <h3 class="frequency-title">Trending Searches</h3>
+      <div class="keywords-container">
+        <div class="keywords-scroll">
+        </div>
+      </div>
+    </div>
+    <!-- Filter Icon -->
+    <button class="filter-icon" onclick="toggleFilterPanel()">
+      <i class="fas fa-filter"></i>
+    </button>
+
+    <!-- Filter Panel -->
+    <div class="overlay" id="overlay" onclick="toggleFilterPanel()"></div>
+    <div class="filter-panel" id="filterPanel">
+      <button class="close-btn" onclick="toggleFilterPanel()">&times;</button>
+      <h2 style="font-size: 24px; margin-bottom: 10px">Filter Options</h2>
+      <div class="filter-bar">
+        <select id="brand">
+          <option value="">All Brands</option>
+          <option value="Dell">Dell</option>
+          <option value="HP">HP</option>
+          <option value="Lenovo">Lenovo</option>
+          <option value="ASUS">ASUS</option>
+        </select>
+        <select id="ram">
+          <option value="">All RAM</option>
+          <option value="8GB">8GB</option>
+          <option value="16GB">16GB</option>
+          <option value="32GB">32GB</option>
+        </select>
+        <select id="storage">
+          <option value="">All Storage</option>
+          <option value="256GB">256GB</option>
+          <option value="512GB">512GB</option>
+          <option value="1TB">1TB</option>
+        </select>
+        <button onclick="fetchLaptops(event)">Apply Filters</button>
+      </div>
+    </div>
+    <div class="content-section">
+      <div class="laptop-container" id="laptopList"></div>
+      <div class="pagination" id="pagination"></div>
+    </div>
+
+    <div class="modal" id="laptopModal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <img id="modalImage" src="" alt="Laptop Image" />
+        <h2 id="modalName"></h2>
+        <div class="modal-details">
+          <p><strong>Brand:</strong> <span id="modalBrand"></span></p>
+          <p><strong>Price:</strong> <span id="modalPrice"></span></p>
+          <p><strong>Processor:</strong> <span id="modalProcessor"></span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="notification" id="notification">
+      <div class="notification-content">
+        <span id="notification-message"></span>
+        <div class="notification-progress">
+          <div class="notification-progress-bar"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="SearchPage.js" defer></script>
+    <script src="../NotificationBar/Notification.js" defer></script>
+    <script src="../ProgressContainer/ProgressBar.js" defer></script>
+    <script src="../ServiceFiles/BackendInteraction.js" defer></script>
+  </body>
+</html>
