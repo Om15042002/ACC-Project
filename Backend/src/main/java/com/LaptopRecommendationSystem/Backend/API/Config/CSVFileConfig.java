@@ -38,15 +38,15 @@ public class CSVFileConfig {
                 LaptopDetail laptop = new LaptopDetail();
                 laptop.model = data[0];
                 laptop.brand = data[1];
-                laptop.price = Double.parseDouble(data[2]);
+                laptop.price = data[2];
 
                 laptop.processor = laptop.new Processor();
 
-                laptop.processor.brand = data[3];
+                laptop.processor.brand = data[4];
                 laptop.processor.model="";
                 laptop.processor.speedGHz=0;
                 laptop.processor.cores=0;
-                laptop.imageURL = data[4];
+                laptop.imageURL = data[3];
 
                 laptop.memory=null;
                 laptop.specialFeatures=null;

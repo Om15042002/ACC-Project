@@ -28,24 +28,45 @@
     </a>
 
     <!-- Search Container -->
-    <div class="search-container">
-      <div class="search-bar">
-        <input
-          type="text"
-          class="search-input"
-          placeholder="Search For Laptops"
-        />
-        <i class="fas fa-search search-icon"></i>
-        <div class="suggestions-dropdown"></div>
-      </div>
-    </div>
-    <div class="frequency-section">
-      <h3 class="frequency-title">Trending Searches</h3>
-      <div class="keywords-container">
-        <div class="keywords-scroll">
+    <div class="main-container">
+      <div class="header-container">
+        <div class="search-container">
+          <div class="search-section">
+            <div class="search-meta" id="searchMeta">
+              <span class="search-count">
+                <i class="fas fa-chart-line"></i>
+                <span id="searchCount">0</span>
+              </span>
+            </div>
+  
+            <div class="search-bar">
+              <input
+                type="text"
+                class="search-input"
+                placeholder="Search For Laptops"
+              />
+              <i class="fas fa-search search-icon"></i>
+              <div class="suggestions-dropdown"></div>
+            </div>
+          </div>
+
+          <div id="suggestionBox" class="did-you-mean">
+            Did you mean: <span class="suggestion" id="suggestionText"></span>
+          </div>
+        </div>
+        <div class="frequency-section">
+          <h3 class="frequency-title">Trending Searches</h3>
+          <div class="keywords-container">
+            <div class="keywords-scroll"></div>
+          </div>
         </div>
       </div>
+      <div class="content-section">
+        <div class="laptop-container" id="laptopList"></div>
+        <div class="pagination" id="pagination"></div>
+      </div>
     </div>
+
     <!-- Filter Icon -->
     <button class="filter-icon" onclick="toggleFilterPanel()">
       <i class="fas fa-filter"></i>
@@ -76,12 +97,8 @@
           <option value="512GB">512GB</option>
           <option value="1TB">1TB</option>
         </select>
-        <button onclick="fetchLaptops(event)">Apply Filters</button>
+        <button onclick="fetchLaptops(event)">Recommend</button>
       </div>
-    </div>
-    <div class="content-section">
-      <div class="laptop-container" id="laptopList"></div>
-      <div class="pagination" id="pagination"></div>
     </div>
 
     <div class="modal" id="laptopModal">

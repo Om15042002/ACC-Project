@@ -1,17 +1,23 @@
 package com.LaptopRecommendationSystem.Backend.API.Controller;
 
 
-
 import com.LaptopRecommendationSystem.Backend.API.Config.CSVFileConfig;
 import com.LaptopRecommendationSystem.Backend.API.Model.LaptopDetail;
+import com.LaptopRecommendationSystem.Backend.API.ResourceFiles.StringConstants;
+import com.LaptopRecommendationSystem.Backend.API.Services.AlternateSuggestions;
+import com.LaptopRecommendationSystem.Backend.API.Services.SearchFrequency;
 import com.LaptopRecommendationSystem.Backend.API.Services.WordCompletion;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
+import static com.LaptopRecommendationSystem.Backend.API.Services.SearchFrequency.tracker;
 import static com.LaptopRecommendationSystem.Backend.API.Services.WordCompletion.wordTree;
 
 
@@ -32,10 +38,27 @@ public class LaptopController {
 
     // Endpoint: GET /api/data/{inputString}
     @GetMapping("/laptops/{searchString}")
-    public List<LaptopDetail> getWithPathVariable(@PathVariable String searchString) {
+    public List<LaptopDetail> getWithPathVariable(@PathVariable String searchString) throws IOException {
 
         String searchTerm = searchString.trim().toLowerCase();
         System.out.println(searchTerm);
+
+//        tracker.loadSearchQueries(StringConstants.FILEPATH);
+        // Simulate user searches
+        if(tracker == null){
+            tracker= new SearchFrequency();
+            tracker.createTreeFromTXT(StringConstants.SEARCHCONSTANTSPATH);
+        }
+        try {
+            FileWriter writer = new FileWriter(StringConstants.SEARCHCONSTANTSPATH,true);
+            writer.write(searchTerm+"\n"); // Writing a single word
+            writer.close();
+            System.out.println("Successfully written to the file.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        tracker.handleUserQuery(searchTerm);
+
         return laptops.stream()
                 .filter(laptop ->
                         // Check ALL properties of LaptopDetail (customize as needed)
@@ -68,6 +91,28 @@ public class LaptopController {
     private boolean matchesProperty(String propertyValue, String searchTerm) {
         return propertyValue != null &&
                 propertyValue.toLowerCase().contains(searchTerm.toLowerCase());
+    }
+
+    @GetMapping("/laptops/spellcheck/{word}")
+    public List<String> getSpellChekedWord(@PathVariable String word) {
+        String searchTerm = word.trim().toLowerCase();
+        return AlternateSuggestions.SpellCheckAndGiveSuggestion(searchTerm);
+    }
+
+    @GetMapping("/laptops/searchFrequency")
+    public List<Map.Entry<String,Integer>> getSearchFrequencyofTopNWords() throws IOException {
+        if(tracker == null){
+            tracker= new SearchFrequency();
+            tracker.createTreeFromTXT(StringConstants.SEARCHCONSTANTSPATH);
+        }
+
+        return tracker.getTopSearches(10);
+    }
+    @GetMapping("/laptops/searchFrequency/{word}")
+    public Integer getSearchFrequencyofWord(@PathVariable String word) throws IOException {
+        String searchTerm = word.trim().toLowerCase();
+
+        return tracker.getSearchCount(searchTerm);
     }
 
 

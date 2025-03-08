@@ -103,7 +103,7 @@ public class WordSuggestionTree {
         PriorityQueue<WordNode> topWords = new PriorityQueue<>(Comparator.comparingInt(n -> n.frequency));
         for (WordNode wordNode : matchingWords) {
             topWords.add(wordNode);
-            if (topWords.size() > 20) topWords.poll(); // Keep only the top 5
+            if (topWords.size() > 5) topWords.poll(); // Keep only the top 5
         }
 
         // Extract the words in descending order

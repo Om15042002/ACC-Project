@@ -448,7 +448,7 @@ function toggleFilterPanel() {
 // ];
 let laptops = [];
 let currentPage = 1;
-const laptopsPerPage = 12;
+const laptopsPerPage = 15;
 
 async function fetchLaptops(event) {
   const brandFilter = document.getElementById("brand").value;
@@ -470,6 +470,7 @@ async function fetchLaptops(event) {
   if (storageFilter) apiUrl += `storage=${storageFilter}&`;
 
   try {
+    laptops=[];
     const data = await fetchData("/laptops"); // Replace with your API URL
     console.log(data);
 
@@ -487,41 +488,14 @@ async function fetchLaptops(event) {
   }
 }
 
-function displayLaptops() {
-  const laptopList = document.getElementById("laptopList");
-  laptopList.innerHTML = "";
-  console.log("laptops");
-
-  const start = (currentPage - 1) * laptopsPerPage;
-  const end = start + laptopsPerPage;
-  const paginatedLaptops = laptops.slice(start, end);
-
-  if (paginatedLaptops.length === 0) {
-    laptopList.innerHTML = "<p>No laptops found.</p>";
-    return;
-  }
-
-  paginatedLaptops.forEach((laptop) => {
-    laptopList.innerHTML += `
-              <div class="laptop-card">
-                  <img src="${laptop.imageURL}" alt="img">
-                  <h3>${laptop.model}</h3>
-                  <p>Brand: ${laptop.brand}</p>
-                  <p>Price: ${laptop.price}</p>
-                  <p>Processor: ${laptop.processor.brand}</p>
-              </div>
-          `;
-  });
-
-  setupPagination();
-}
 
 function setupPagination() {
   const pagination = document.getElementById("pagination");
   pagination.innerHTML = "";
 
   const totalPages = Math.ceil(laptops.length / laptopsPerPage);
-
+  console.log(totalPages);  
+  
   // Previous Button
   pagination.innerHTML += `<button onclick="goToPage(${currentPage - 1})" ${
     currentPage === 1 ? "disabled" : ""
@@ -556,12 +530,13 @@ function setupPagination() {
         currentPage === totalPages ? "active" : ""
       }" onclick="goToPage(${totalPages})">${totalPages}</button>`;
     }
+    // Next Button
+    pagination.innerHTML += `<button onclick="goToPage(${currentPage + 1})" ${
+      currentPage === totalPages ? "disabled" : ""
+    }>›</button>`;
+  } else {
+    pagination.innerHTML = ""; // Ensure pagination is hidden
   }
-
-  // Next Button
-  pagination.innerHTML += `<button onclick="goToPage(${currentPage + 1})" ${
-    currentPage === totalPages ? "disabled" : ""
-  }>›</button>`;
 }
 
 function goToPage(page) {
@@ -571,22 +546,46 @@ function goToPage(page) {
   displayLaptops();
 }
 
-const dummySearchData = [
-  { term: "All", count: 1200 },
-  { term: "Music", count: 950 },
-  { term: "Mixes", count: 850 },
-  { term: "Indian pop", count: 780 },
-  { term: "Disha Vakani", count: 700 },
-  { term: "Shreya Ghoshal", count: 650 },
-  { term: "Arijit Singh", count: 600 },
-  { term: "Movie musicals", count: 550 },
-  { term: "Live News", count: 500 },
-  { term: "Albums", count: 480 },
-];
+// let dummySearchData = [
+//   { term: "All", count: 1200 },
+//   { term: "Music", count: 950 },
+//   { term: "Mixes", count: 850 },
+//   { term: "Indian pop", count: 780 },
+//   { term: "Disha Vakani", count: 700 },
+//   { term: "Shreya Ghoshal", count: 650 },
+//   { term: "Arijit Singh", count: 600 },
+//   { term: "Movie musicals", count: 550 },
+//   { term: "Live News", count: 500 },
+//   { term: "Albums", count: 480 },
+// ];
+
+async function loadSearchFrequencyData() {
+  try {
+    const data = await fetchData("/laptops/searchFrequency"); // Replace with your API URL
+    console.log(data);
+
+    if (data) {
+      dummySearchData = data;
+    }
+    // Transform array of objects into word-frequency pairs
+    const frequencyPairs = data.map((item) => {
+      // Get first key-value pair from each object
+      const [word, frequency] = Object.entries(item)[0];
+      return { term: word, count: frequency };
+    });
+
+    return frequencyPairs;
+  } catch (error) {
+    console.error("Error loading search frequency data:", error);
+    return [];
+  }
+}
 
 // Render function
 function renderKeywords(data) {
   const container = document.querySelector(".keywords-scroll");
+  console.log(data);
+
   container.innerHTML = data
     .map(
       (item) => `
@@ -619,6 +618,7 @@ function addTabClickListeners() {
       // Set search input value
       searchInput.value = searchTerm;
 
+      laptops= [];
       // Perform the search
       const data = await fetchData("/laptops/" + searchTerm); // Replace with your API URL
       console.log(data);
@@ -629,6 +629,10 @@ function addTabClickListeners() {
       }
       currentPage = 1; // Reset to first page after filtering
       displayLaptops();
+      let d = await loadSearchFrequencyData();
+      // console.log(data);
+
+      renderKeywords(d);
     });
   });
 }
@@ -639,9 +643,12 @@ keywordsContainer.addEventListener("wheel", (e) => {
   keywordsContainer.scrollLeft += e.deltaY;
 });
 
-document.addEventListener("DOMContentLoaded", function (event) {
+document.addEventListener("DOMContentLoaded", async function (event) {
   fetchLaptops(event);
-  renderKeywords(dummySearchData);
+  let data = await loadSearchFrequencyData();
+  console.log(data);
+
+  renderKeywords(data);
 });
 
 function showLaptopDetails(laptop) {
@@ -674,12 +681,24 @@ function displayLaptops() {
   const laptopList = document.getElementById("laptopList");
   laptopList.innerHTML = "";
 
+  const pagination = document.getElementById("pagination");
+
   const start = (currentPage - 1) * laptopsPerPage;
   const end = start + laptopsPerPage;
   const paginatedLaptops = laptops.slice(start, end);
 
+  showSearchCount(paginatedLaptops.length);
+
+  setupPagination();
+
+
   if (paginatedLaptops.length === 0) {
-    laptopList.innerHTML = "<p>No laptops found.</p>";
+    laptopList.innerHTML = `
+    <div class="no-results">
+      <img src="C:\\Users\\Admin\\Desktop\\ACC Project\\FrontEnd\\Resources\\Images\\Result Not Found.jpg" alt="No laptops found">
+      <p>No laptops matching your search criteria</p>
+    </div>
+  `;
     return;
   }
 
@@ -696,8 +715,8 @@ function displayLaptops() {
     card.addEventListener("click", () => showLaptopDetails(laptop));
     laptopList.appendChild(card);
   });
+  
 
-  setupPagination();
 }
 
 // document
@@ -796,6 +815,7 @@ searchInput.addEventListener("keydown", async (e) => {
         showNotification("Please enter a search query!");
         e.preventDefault();
       } else {
+        laptops= [];
         const data = await fetchData("/laptops/" + searchValue); // Replace with your API URL
         console.log(data);
 
@@ -805,6 +825,10 @@ searchInput.addEventListener("keydown", async (e) => {
         }
         currentPage = 1; // Reset to first page after filtering
         displayLaptops();
+        let d = await loadSearchFrequencyData();
+        renderKeywords(d);
+
+        await handleSubmit();
       }
       return;
     }
@@ -841,3 +865,63 @@ dropdown.addEventListener("mouseover", (e) => {
     });
   }
 });
+
+const suggestionBox = document.getElementById("suggestionBox");
+const suggestionText = document.getElementById("suggestionText");
+
+async function fetchSpellCheck(query) {
+  try {
+    // Replace with your actual API endpoint
+    const response = await fetchData(query); // Replace with your API URL
+    console.log(response);
+
+    // const suggestions = response.json();
+    return response;
+  } catch (error) {
+    console.error("Error fetching suggestions:", error);
+    return [];
+  }
+}
+
+async function handleSubmit() {
+  const query = searchInput.value.trim();
+
+  // Perform main search here
+  console.log("Searching for:", query);
+
+  // Fetch suggestions
+  const suggestions = await fetchSpellCheck("/laptops/spellcheck/" + query); // Replace with your API URL
+  console.log(suggestions);
+  // Update suggestion UI
+  if (suggestions.length > 0) {
+    suggestionText.textContent = suggestions[0];
+    suggestionBox.classList.add("show");
+  } else {
+    suggestionBox.classList.remove("show");
+  }
+}
+
+// Event listeners
+// searchForm.addEventListener("submit", handleSubmit);
+
+// // Handle suggestion clicks
+// suggestionText.addEventListener("click", () => {
+//   searchInput.value = suggestionText.textContent;
+//   searchForm.dispatchEvent(new Event("submit"));
+// });
+
+async function showSearchCount(length) {
+  const query = searchInput.value.trim();
+  if (query != null && query != "") {
+    const searchMeta = document.getElementById("searchMeta");
+    // Fetch and display search count
+    const count = await fetchData(`/laptops/searchFrequency/${query}`);
+    console.log(count);
+
+    document.getElementById("searchCount").textContent = count;
+    searchMeta.style.display = "flex";
+  } else {
+    searchMeta.style.display = "none";
+  }
+  // Show/hide search meta
+}

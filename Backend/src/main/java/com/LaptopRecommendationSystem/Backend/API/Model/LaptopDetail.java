@@ -7,7 +7,7 @@ public class LaptopDetail {
 
     public String model;
     public String brand;
-    public double price;
+    public String price;
     public String imageURL;
 
     //below properties are nested
