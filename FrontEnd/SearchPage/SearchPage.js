@@ -4,473 +4,62 @@ function toggleFilterPanel() {
   panel.classList.toggle("active");
   overlay.style.display = panel.classList.contains("active") ? "block" : "none";
 }
-
-// function fetchLaptops(event) {
-//   // Add filter functionality here
-//   console.log("Applying filters...");
-//   const brandValue = document.querySelector("brand").value;
-//   const ramValue = document.querySelector("ram").value;
-//   const storageValue = document.querySelector("storage").value;
-//   console.log("hello");
-
-//   if (
-//     !brandValue.trim() &&
-//     !ramValue.trim() &&
-//     !storageValue.trim() &&
-//     event.type != "DOMContentLoaded"
-//   ) {
-//     showNotification("Please select atleast One Filter!");
-//   } else {
-//     toggleFilterPanel();
-//   }
-// }
-// let laptops = [
-//   {
-//     name: "Dell XPS 13",
-//     brand: "Dell",
-//     ram: "16GB",
-//     storage: "512GB",
-//     img: "data:image/webp;base64,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",
-//   },
-//   {
-//     name: "HP Spectre x360",
-//     brand: "HP",
-//     ram: "16GB",
-//     storage: "1TB",
-//     img: "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcT1X1jMWbgeCOqEp02vrgycRNG4A1L1Zeo03FZeogyDTT1KVezqnfflNTg8XTur_691RAxqsrv89UFDmwiz1vi5w76aWv4mAV4bK-SLsIYjCFaFw5hr93188QRropC8unD70yaCWXYoWA&usqp=CAc",
-//   },
-//   {
-//     name: "Lenovo ThinkPad X1",
-//     brand: "Lenovo",
-//     ram: "8GB",
-//     storage: "256GB",
-//     img: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTbqGO2yq5FBJB0lyKN-Zgf6dA-FIH56TP7QS4DLjwLD0YpTq_hOrYF7Z8Q2rlLBD7L-UfhKlibMUWXubAVAaCp-doB-clZTwT4-eXutZYWT8-GXWEEcrUJ0HIjtBdS3AGkxZGlsA&usqp=CAc",
-//   },
-//   {
-//     name: "MacBook Air M2",
-//     brand: "Apple",
-//     ram: "16GB",
-//     storage: "512GB",
-//     img: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSw4VvNtYGArx0AACGoHwcsHEWqiBplSOTJRu6nnBhZmqXGMedGan2SYDZ9O7vCVYhQtdCsE-OeBJGmz38T6BoMz53KjdMc2rcEPBFFn8-W9LQYxLDtmaxZF2cHEqeCuNDZnTh0BBZy&usqp=CAc",
-//   },
-//   {
-//     name: "Lenovo ThinkPad X1",
-//     brand: "Lenovo",
-//     ram: "8GB",
-//     storage: "256GB",
-//     img: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTbqGO2yq5FBJB0lyKN-Zgf6dA-FIH56TP7QS4DLjwLD0YpTq_hOrYF7Z8Q2rlLBD7L-UfhKlibMUWXubAVAaCp-doB-clZTwT4-eXutZYWT8-GXWEEcrUJ0HIjtBdS3AGkxZGlsA&usqp=CAc",
-//   },
-//   {
-//     name: "MacBook Air M2",
-//     brand: "Apple",
-//     ram: "16GB",
-//     storage: "512GB",
-//     img: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSw4VvNtYGArx0AACGoHwcsHEWqiBplSOTJRu6nnBhZmqXGMedGan2SYDZ9O7vCVYhQtdCsE-OeBJGmz38T6BoMz53KjdMc2rcEPBFFn8-W9LQYxLDtmaxZF2cHEqeCuNDZnTh0BBZy&usqp=CAc",
-//   },
-//   {
-//     name: "Lenovo ThinkPad X1",
-//     brand: "Lenovo",
-//     ram: "8GB",
-//     storage: "256GB",
-//     img: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTbqGO2yq5FBJB0lyKN-Zgf6dA-FIH56TP7QS4DLjwLD0YpTq_hOrYF7Z8Q2rlLBD7L-UfhKlibMUWXubAVAaCp-doB-clZTwT4-eXutZYWT8-GXWEEcrUJ0HIjtBdS3AGkxZGlsA&usqp=CAc",
-//   },
-//   {
-//     name: "MacBook Air M2",
-//     brand: "Apple",
-//     ram: "16GB",
-//     storage: "512GB",
-//     img: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSw4VvNtYGArx0AACGoHwcsHEWqiBplSOTJRu6nnBhZmqXGMedGan2SYDZ9O7vCVYhQtdCsE-OeBJGmz38T6BoMz53KjdMc2rcEPBFFn8-W9LQYxLDtmaxZF2cHEqeCuNDZnTh0BBZy&usqp=CAc",
-//   },
-//   {
-//     name: "Lenovo ThinkPad X1",
-//     brand: "Lenovo",
-//     ram: "8GB",
-//     storage: "256GB",
-//     img: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTbqGO2yq5FBJB0lyKN-Zgf6dA-FIH56TP7QS4DLjwLD0YpTq_hOrYF7Z8Q2rlLBD7L-UfhKlibMUWXubAVAaCp-doB-clZTwT4-eXutZYWT8-GXWEEcrUJ0HIjtBdS3AGkxZGlsA&usqp=CAc",
-//   },
-//   {
-//     name: "MacBook Air M2",
-//     brand: "Apple",
-//     ram: "16GB",
-//     storage: "512GB",
-//     img: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSw4VvNtYGArx0AACGoHwcsHEWqiBplSOTJRu6nnBhZmqXGMedGan2SYDZ9O7vCVYhQtdCsE-OeBJGmz38T6BoMz53KjdMc2rcEPBFFn8-W9LQYxLDtmaxZF2cHEqeCuNDZnTh0BBZy&usqp=CAc",
-//   },
-//   {
-//     name: "Lenovo ThinkPad X1",
-//     brand: "Lenovo",
-//     ram: "8GB",
-//     storage: "256GB",
-//     img: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTbqGO2yq5FBJB0lyKN-Zgf6dA-FIH56TP7QS4DLjwLD0YpTq_hOrYF7Z8Q2rlLBD7L-UfhKlibMUWXubAVAaCp-doB-clZTwT4-eXutZYWT8-GXWEEcrUJ0HIjtBdS3AGkxZGlsA&usqp=CAc",
-//   },
-//   {
-//     name: "MacBook Air M2",
-//     brand: "Apple",
-//     ram: "16GB",
-//     storage: "512GB",
-//     img: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSw4VvNtYGArx0AACGoHwcsHEWqiBplSOTJRu6nnBhZmqXGMedGan2SYDZ9O7vCVYhQtdCsE-OeBJGmz38T6BoMz53KjdMc2rcEPBFFn8-W9LQYxLDtmaxZF2cHEqeCuNDZnTh0BBZy&usqp=CAc",
-//   },
-//   {
-//     name: "Dell XPS 13",
-//     brand: "Dell",
-//     ram: "16GB",
-//     storage: "512GB",
-//     img: "data:image/webp;base64,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",
-//   },
-//   {
-//     name: "HP Spectre x360",
-//     brand: "HP",
-//     ram: "16GB",
-//     storage: "1TB",
-//     img: "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcT1X1jMWbgeCOqEp02vrgycRNG4A1L1Zeo03FZeogyDTT1KVezqnfflNTg8XTur_691RAxqsrv89UFDmwiz1vi5w76aWv4mAV4bK-SLsIYjCFaFw5hr93188QRropC8unD70yaCWXYoWA&usqp=CAc",
-//   },
-//   {
-//     name: "Lenovo ThinkPad X1",
-//     brand: "Lenovo",
-//     ram: "8GB",
-//     storage: "256GB",
-//     img: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTbqGO2yq5FBJB0lyKN-Zgf6dA-FIH56TP7QS4DLjwLD0YpTq_hOrYF7Z8Q2rlLBD7L-UfhKlibMUWXubAVAaCp-doB-clZTwT4-eXutZYWT8-GXWEEcrUJ0HIjtBdS3AGkxZGlsA&usqp=CAc",
-//   },
-//   {
-//     name: "MacBook Air M2",
-//     brand: "Apple",
-//     ram: "16GB",
-//     storage: "512GB",
-//     img: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSw4VvNtYGArx0AACGoHwcsHEWqiBplSOTJRu6nnBhZmqXGMedGan2SYDZ9O7vCVYhQtdCsE-OeBJGmz38T6BoMz53KjdMc2rcEPBFFn8-W9LQYxLDtmaxZF2cHEqeCuNDZnTh0BBZy&usqp=CAc",
-//   },
-//   {
-//     name: "Lenovo ThinkPad X1",
-//     brand: "Lenovo",
-//     ram: "8GB",
-//     storage: "256GB",
-//     img: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTbqGO2yq5FBJB0lyKN-Zgf6dA-FIH56TP7QS4DLjwLD0YpTq_hOrYF7Z8Q2rlLBD7L-UfhKlibMUWXubAVAaCp-doB-clZTwT4-eXutZYWT8-GXWEEcrUJ0HIjtBdS3AGkxZGlsA&usqp=CAc",
-//   },
-//   {
-//     name: "MacBook Air M2",
-//     brand: "Apple",
-//     ram: "16GB",
-//     storage: "512GB",
-//     img: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSw4VvNtYGArx0AACGoHwcsHEWqiBplSOTJRu6nnBhZmqXGMedGan2SYDZ9O7vCVYhQtdCsE-OeBJGmz38T6BoMz53KjdMc2rcEPBFFn8-W9LQYxLDtmaxZF2cHEqeCuNDZnTh0BBZy&usqp=CAc",
-//   },
-//   {
-//     name: "Lenovo ThinkPad X1",
-//     brand: "Lenovo",
-//     ram: "8GB",
-//     storage: "256GB",
-//     img: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTbqGO2yq5FBJB0lyKN-Zgf6dA-FIH56TP7QS4DLjwLD0YpTq_hOrYF7Z8Q2rlLBD7L-UfhKlibMUWXubAVAaCp-doB-clZTwT4-eXutZYWT8-GXWEEcrUJ0HIjtBdS3AGkxZGlsA&usqp=CAc",
-//   },
-//   {
-//     name: "MacBook Air M2",
-//     brand: "Apple",
-//     ram: "16GB",
-//     storage: "512GB",
-//     img: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSw4VvNtYGArx0AACGoHwcsHEWqiBplSOTJRu6nnBhZmqXGMedGan2SYDZ9O7vCVYhQtdCsE-OeBJGmz38T6BoMz53KjdMc2rcEPBFFn8-W9LQYxLDtmaxZF2cHEqeCuNDZnTh0BBZy&usqp=CAc",
-//   },
-//   {
-//     name: "Lenovo ThinkPad X1",
-//     brand: "Lenovo",
-//     ram: "8GB",
-//     storage: "256GB",
-//     img: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTbqGO2yq5FBJB0lyKN-Zgf6dA-FIH56TP7QS4DLjwLD0YpTq_hOrYF7Z8Q2rlLBD7L-UfhKlibMUWXubAVAaCp-doB-clZTwT4-eXutZYWT8-GXWEEcrUJ0HIjtBdS3AGkxZGlsA&usqp=CAc",
-//   },
-//   {
-//     name: "MacBook Air M2",
-//     brand: "Apple",
-//     ram: "16GB",
-//     storage: "512GB",
-//     img: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSw4VvNtYGArx0AACGoHwcsHEWqiBplSOTJRu6nnBhZmqXGMedGan2SYDZ9O7vCVYhQtdCsE-OeBJGmz38T6BoMz53KjdMc2rcEPBFFn8-W9LQYxLDtmaxZF2cHEqeCuNDZnTh0BBZy&usqp=CAc",
-//   },
-//   {
-//     name: "Lenovo ThinkPad X1",
-//     brand: "Lenovo",
-//     ram: "8GB",
-//     storage: "256GB",
-//     img: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTbqGO2yq5FBJB0lyKN-Zgf6dA-FIH56TP7QS4DLjwLD0YpTq_hOrYF7Z8Q2rlLBD7L-UfhKlibMUWXubAVAaCp-doB-clZTwT4-eXutZYWT8-GXWEEcrUJ0HIjtBdS3AGkxZGlsA&usqp=CAc",
-//   },
-//   {
-//     name: "MacBook Air M2",
-//     brand: "Apple",
-//     ram: "16GB",
-//     storage: "512GB",
-//     img: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSw4VvNtYGArx0AACGoHwcsHEWqiBplSOTJRu6nnBhZmqXGMedGan2SYDZ9O7vCVYhQtdCsE-OeBJGmz38T6BoMz53KjdMc2rcEPBFFn8-W9LQYxLDtmaxZF2cHEqeCuNDZnTh0BBZy&usqp=CAc",
-//   },
-//   {
-//     name: "Dell XPS 13",
-//     brand: "Dell",
-//     ram: "16GB",
-//     storage: "512GB",
-//     img: "data:image/webp;base64,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",
-//   },
-//   {
-//     name: "HP Spectre x360",
-//     brand: "HP",
-//     ram: "16GB",
-//     storage: "1TB",
-//     img: "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcT1X1jMWbgeCOqEp02vrgycRNG4A1L1Zeo03FZeogyDTT1KVezqnfflNTg8XTur_691RAxqsrv89UFDmwiz1vi5w76aWv4mAV4bK-SLsIYjCFaFw5hr93188QRropC8unD70yaCWXYoWA&usqp=CAc",
-//   },
-//   {
-//     name: "Lenovo ThinkPad X1",
-//     brand: "Lenovo",
-//     ram: "8GB",
-//     storage: "256GB",
-//     img: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTbqGO2yq5FBJB0lyKN-Zgf6dA-FIH56TP7QS4DLjwLD0YpTq_hOrYF7Z8Q2rlLBD7L-UfhKlibMUWXubAVAaCp-doB-clZTwT4-eXutZYWT8-GXWEEcrUJ0HIjtBdS3AGkxZGlsA&usqp=CAc",
-//   },
-//   {
-//     name: "MacBook Air M2",
-//     brand: "Apple",
-//     ram: "16GB",
-//     storage: "512GB",
-//     img: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSw4VvNtYGArx0AACGoHwcsHEWqiBplSOTJRu6nnBhZmqXGMedGan2SYDZ9O7vCVYhQtdCsE-OeBJGmz38T6BoMz53KjdMc2rcEPBFFn8-W9LQYxLDtmaxZF2cHEqeCuNDZnTh0BBZy&usqp=CAc",
-//   },
-//   {
-//     name: "Lenovo ThinkPad X1",
-//     brand: "Lenovo",
-//     ram: "8GB",
-//     storage: "256GB",
-//     img: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTbqGO2yq5FBJB0lyKN-Zgf6dA-FIH56TP7QS4DLjwLD0YpTq_hOrYF7Z8Q2rlLBD7L-UfhKlibMUWXubAVAaCp-doB-clZTwT4-eXutZYWT8-GXWEEcrUJ0HIjtBdS3AGkxZGlsA&usqp=CAc",
-//   },
-//   {
-//     name: "MacBook Air M2",
-//     brand: "Apple",
-//     ram: "16GB",
-//     storage: "512GB",
-//     img: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSw4VvNtYGArx0AACGoHwcsHEWqiBplSOTJRu6nnBhZmqXGMedGan2SYDZ9O7vCVYhQtdCsE-OeBJGmz38T6BoMz53KjdMc2rcEPBFFn8-W9LQYxLDtmaxZF2cHEqeCuNDZnTh0BBZy&usqp=CAc",
-//   },
-//   {
-//     name: "Lenovo ThinkPad X1",
-//     brand: "Lenovo",
-//     ram: "8GB",
-//     storage: "256GB",
-//     img: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTbqGO2yq5FBJB0lyKN-Zgf6dA-FIH56TP7QS4DLjwLD0YpTq_hOrYF7Z8Q2rlLBD7L-UfhKlibMUWXubAVAaCp-doB-clZTwT4-eXutZYWT8-GXWEEcrUJ0HIjtBdS3AGkxZGlsA&usqp=CAc",
-//   },
-//   {
-//     name: "MacBook Air M2",
-//     brand: "Apple",
-//     ram: "16GB",
-//     storage: "512GB",
-//     img: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSw4VvNtYGArx0AACGoHwcsHEWqiBplSOTJRu6nnBhZmqXGMedGan2SYDZ9O7vCVYhQtdCsE-OeBJGmz38T6BoMz53KjdMc2rcEPBFFn8-W9LQYxLDtmaxZF2cHEqeCuNDZnTh0BBZy&usqp=CAc",
-//   },
-//   {
-//     name: "Lenovo ThinkPad X1",
-//     brand: "Lenovo",
-//     ram: "8GB",
-//     storage: "256GB",
-//     img: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTbqGO2yq5FBJB0lyKN-Zgf6dA-FIH56TP7QS4DLjwLD0YpTq_hOrYF7Z8Q2rlLBD7L-UfhKlibMUWXubAVAaCp-doB-clZTwT4-eXutZYWT8-GXWEEcrUJ0HIjtBdS3AGkxZGlsA&usqp=CAc",
-//   },
-//   {
-//     name: "MacBook Air M2",
-//     brand: "Apple",
-//     ram: "16GB",
-//     storage: "512GB",
-//     img: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSw4VvNtYGArx0AACGoHwcsHEWqiBplSOTJRu6nnBhZmqXGMedGan2SYDZ9O7vCVYhQtdCsE-OeBJGmz38T6BoMz53KjdMc2rcEPBFFn8-W9LQYxLDtmaxZF2cHEqeCuNDZnTh0BBZy&usqp=CAc",
-//   },
-//   {
-//     name: "Lenovo ThinkPad X1",
-//     brand: "Lenovo",
-//     ram: "8GB",
-//     storage: "256GB",
-//     img: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTbqGO2yq5FBJB0lyKN-Zgf6dA-FIH56TP7QS4DLjwLD0YpTq_hOrYF7Z8Q2rlLBD7L-UfhKlibMUWXubAVAaCp-doB-clZTwT4-eXutZYWT8-GXWEEcrUJ0HIjtBdS3AGkxZGlsA&usqp=CAc",
-//   },
-//   {
-//     name: "MacBook Air M2",
-//     brand: "Apple",
-//     ram: "16GB",
-//     storage: "512GB",
-//     img: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSw4VvNtYGArx0AACGoHwcsHEWqiBplSOTJRu6nnBhZmqXGMedGan2SYDZ9O7vCVYhQtdCsE-OeBJGmz38T6BoMz53KjdMc2rcEPBFFn8-W9LQYxLDtmaxZF2cHEqeCuNDZnTh0BBZy&usqp=CAc",
-//   },
-//   {
-//     name: "Dell XPS 13",
-//     brand: "Dell",
-//     ram: "16GB",
-//     storage: "512GB",
-//     img: "data:image/webp;base64,UklGRsQJAABXRUJQVlA4ILgJAADwJQCdASqOAFEAPlEWlEojkdHJ6DgFBLOAa6XreQj8E+F/hPCHw8+gvb/kiRC/lP4K/X+aPfz8NNQj8W/mf+G37ewHoEew30r/O/l9zF9tx5WngYedewJ/Kf7Z/1vUD/1f8t+XHtc+if+v/nfgF/l/9a/2398/ef4pPYj+7Xsp/tcsaKfen9/CTPnI8l+NPajXiN0ePwMcszB15gJ08q9V0k1oqUZ/GyvNS5dxPq/y2tcOPusu3LoGg/aF7mfSW4aYa8TJBB0KRXQV2a2LTJEHsrwJjm2cW04Je2s71GE61Ovgoj/6SGknzT2OtofuvQBAyUOR+9HNc3HRCWd1xHX1VBfhoebcbh34JUNA2cyhvQef1IbrbydZ4HXITfbKD5gDPtvtqK91uOlFleCQ27Pl7937pH/CR8AA/v5n8G1hDSY1pR0w8jhEkefe1nakGQ0T/DnjTxkgL4hTQGj6xk/IZNWwLMJ2A2Fkqc2gIwx1Hewbc9rVFoJCeHFKvs6EymI4sEuUMINCAt+lnNl6i/5qiegxbCjyYcdoN9yEMXZLBO5aNyJ6DxYTep6/xWCDUaMy7N5/BfH0VrOaEWreEkErpo0JzW0NpvsJNTckFBsSnUj2GDSXOtuvWZF4felSfUaqU7lYMGRec/H7RO9UWs67nUBILIpDr/eu5Y01EfTqsXGP8cmN1PjX1EubUsObI21et2zktg+JyJm21gqHAAFatIh4KkEYaLpw6P1KSrTVFi+hnSEKJ5Z1jrVR93+V/WTitCfMKgoRi+HWx4W6pWNc/+FlW0CJDa6KGddhx/4kH2wCW8tApK7BRVM8br6y9tIFTc0njRf60WF1SXO/W8dpDxd30s+cnvDhE7b7nd4VnE/u9hM2QaT5j8nnCbfbHlrPPq+7AblSqpijDmSmzRFwcVvBCFzqez+F8NEuEJ4adPHNoAR/ZlrvQvGga4N5poyFsOpfleXC2b+xJetKLURDRXw14ubMABMSKjZFztPnQuAMnQvEDn3xloYl/OQ7ttEG1rAO+bnJqnrnsCqgv8FXhj5oI5/W/03vIeumyHS8eKLTXQbTHEqbf4aFjCiSwiybwTnaUAXxv2z2CPL0zeGja3tEAWoxEcSNkJZ1JuFejdSIuhCvdmavzGEC2V/d2OOa0cdxqgf7YZNNyeQT06tfpt7Ra2QMzRFVtjTXXENu/YSb/7M2jYb3qD9sH6Y077/0v5nScusBwVT28B0NNI6EJHVADTb0nEk6kuc+3OVW8qIHDlO/VolwTDrZM/I2ehPuySXjVd3SGea6LFeaaqrVQAJeC64sD6CItPe+pKzc5Fz9MGWAyp6G3yLsQfyZZB+plS5YTw+53K/fYyGbXUq/csLeHDUnflgLgp0W4zlaifnEZ0Ps5c+kkYM1+DYLp26evau/SF1jU//khGquceiY0n/P/9NxBYh5wccxh6pLYh0jjJAC2KgQA70fvD4+v9ReFwumxGfKJvs2Ds2XZngT12XJl8rOi6fP+0hyrmy7Ms8rf8uH/lYJxW7EqUFZAtfBgtdz7fEyqEedCe5Zph3GaXFnaHDLrHgK4djLK2ZtZjAnHDJUb3qgXMF7rBimKy7O7LS8JGzQkUe6Nbgpo8adoGt/wk4PUuRVfvXKUURfNaO9/HQkGJxT0X7JgXA43PHXX3O0z0mspV/vRJIK5mf6KTrIekr+TqDqb6CnHoXjQhv75Sj+eo1qm7/kOuqrzSBJk+5YTuL3XXckYKVqi1f4ZVagWN0q2cOgsQv0gW2kCF8csyCrvenkundsZcuvh875wu/YHiEeRCzspYmfZvSYLHyCopKNA4pUcJEnko7CYhFQxIgCOXAt8F8TxhPC7YxYK1rs48BGOWdw51xUI+4Oxu03n4B14ZN8f5/+E18Ci0cpVDDyD8U4B0xZX3ASghTf/1fFLzz6Vii7VG5vbqKJ5WffSs0uHADtivquoqVKJCTrH5dDLQUlcojp5clO3GCXCmTe5igSsg1jl8FwaF2zJ+GUapCCu/fgq0BMQS8uBJHHjRiVTChnRr5XaRrH+xjYdgHBWje5h4sfK9qErwVN4DjQ5jK6eHMkz2BAdugd/1W2h1J2WeQyz9zU4oScMIlZa6FedJLsnLp6wD/v7fWkJM5bH5VGFHYkrhnHLgBRWtgwMs7WnyKsDgbmX0JLjwyN/vz8DiQEK+FVmtoHzmvFbafaHFfSA6jfg+i29dgoyAH9BxnvQ6PS0MNJ/IeFgv99nJUGa4RfSBCAxNe3zcweVEA0r0ssazdRfdclo2T6VGmmFZICEaA2PE79IJHTjhZTcw2kqPHvACrsNrTiWs8a/sTXyxGhLbQb24HbSFQRJmuvcYPtDHdS8Vp45Mc8hLcqOgwwqTO6HDAmhcHWCDrLcwxRbwkN9Be891n9vMzqaXQ7XYbV6KY0hvWhB3PxwoI9/OAQChBwbNrdIz3D8VHvaL3DOFpBNUnYQgA+X8X5J1XzH3V7nTt7imSqGSvw81B7FpCT5s8Gb+y6RBZk+nutrieQiaI02rr/25zwmUjBaG7mjoqy2SCTQEHr8lA4WIkGCkDDuq32Quz4P9J0Llh3gI/ugn8ntvWhLzhi8Jhh+zju/foTiA7cnedYFVr+SZBpeLb4zl9JQmCUxQLGWU6a4m7LDtd8YGL/8RUySVaVWXXNZLa+qhMwN1lROrXBwhdp470dlP1uZ8XOjHuL4aFChYltGXwxCcCnv+GW3kfZWq3A6J4u1Z9MZaL8o5eBOJIYDkuDZ2jp1Xft+X/N242X/J/1cSuk09OPk6pW8huG5AytYQPMuqtzZaH//RJW1qYkryhFYhSEEUYkVv1n8rvPfMh2tGkoXTi1GNm9J3q+GetyppYnX1zUHc77Mam3/YJrmVHOBbTHRJcPVm43qdTwer2kyLA5Ig2Yc2OlqBskP/rwv4b3F5YeG6SUOmDTIN3lm/oER3tdP8VYe4rREcR5AB4lDyj1fxcafY2KIR6i1mRGu/nxA/GOknNaryF2fB+mdQh/K32+H8aFoM4g6JU7T6UZ76qCUcfnNOK2KTpVw+6/6gFd6sMxuwwARegB1zZtoDyX8+P5pUMlPK/LMLhb6MG03G2v8o3TbsY3XoCX9H07hc6Pfz9TS9LtW7yZZepTZrLr4mNzMgprHK7ycHIgfwzEclEaZ8UZOFSyhZqL8HzkR2taZGSHcOZRnaj0wq+7KKwrXaHc1ulHScbhX5xBBOK017iABGlsmgsxVHf8wXV9qeFurAipFUKQynyZ97CJgcx668K870YaTqsZq2CUpjH0242X4AAq5kWYXYySDwyFKG9AAAAA",
-//   },
-//   {
-//     name: "HP Spectre x360",
-//     brand: "HP",
-//     ram: "16GB",
-//     storage: "1TB",
-//     img: "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcT1X1jMWbgeCOqEp02vrgycRNG4A1L1Zeo03FZeogyDTT1KVezqnfflNTg8XTur_691RAxqsrv89UFDmwiz1vi5w76aWv4mAV4bK-SLsIYjCFaFw5hr93188QRropC8unD70yaCWXYoWA&usqp=CAc",
-//   },
-//   {
-//     name: "Lenovo ThinkPad X1",
-//     brand: "Lenovo",
-//     ram: "8GB",
-//     storage: "256GB",
-//     img: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTbqGO2yq5FBJB0lyKN-Zgf6dA-FIH56TP7QS4DLjwLD0YpTq_hOrYF7Z8Q2rlLBD7L-UfhKlibMUWXubAVAaCp-doB-clZTwT4-eXutZYWT8-GXWEEcrUJ0HIjtBdS3AGkxZGlsA&usqp=CAc",
-//   },
-//   {
-//     name: "MacBook Air M2",
-//     brand: "Apple",
-//     ram: "16GB",
-//     storage: "512GB",
-//     img: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSw4VvNtYGArx0AACGoHwcsHEWqiBplSOTJRu6nnBhZmqXGMedGan2SYDZ9O7vCVYhQtdCsE-OeBJGmz38T6BoMz53KjdMc2rcEPBFFn8-W9LQYxLDtmaxZF2cHEqeCuNDZnTh0BBZy&usqp=CAc",
-//   },
-//   {
-//     name: "Lenovo ThinkPad X1",
-//     brand: "Lenovo",
-//     ram: "8GB",
-//     storage: "256GB",
-//     img: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTbqGO2yq5FBJB0lyKN-Zgf6dA-FIH56TP7QS4DLjwLD0YpTq_hOrYF7Z8Q2rlLBD7L-UfhKlibMUWXubAVAaCp-doB-clZTwT4-eXutZYWT8-GXWEEcrUJ0HIjtBdS3AGkxZGlsA&usqp=CAc",
-//   },
-//   {
-//     name: "MacBook Air M2",
-//     brand: "Apple",
-//     ram: "16GB",
-//     storage: "512GB",
-//     img: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSw4VvNtYGArx0AACGoHwcsHEWqiBplSOTJRu6nnBhZmqXGMedGan2SYDZ9O7vCVYhQtdCsE-OeBJGmz38T6BoMz53KjdMc2rcEPBFFn8-W9LQYxLDtmaxZF2cHEqeCuNDZnTh0BBZy&usqp=CAc",
-//   },
-//   {
-//     name: "Lenovo ThinkPad X1",
-//     brand: "Lenovo",
-//     ram: "8GB",
-//     storage: "256GB",
-//     img: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTbqGO2yq5FBJB0lyKN-Zgf6dA-FIH56TP7QS4DLjwLD0YpTq_hOrYF7Z8Q2rlLBD7L-UfhKlibMUWXubAVAaCp-doB-clZTwT4-eXutZYWT8-GXWEEcrUJ0HIjtBdS3AGkxZGlsA&usqp=CAc",
-//   },
-//   {
-//     name: "MacBook Air M2",
-//     brand: "Apple",
-//     ram: "16GB",
-//     storage: "512GB",
-//     img: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSw4VvNtYGArx0AACGoHwcsHEWqiBplSOTJRu6nnBhZmqXGMedGan2SYDZ9O7vCVYhQtdCsE-OeBJGmz38T6BoMz53KjdMc2rcEPBFFn8-W9LQYxLDtmaxZF2cHEqeCuNDZnTh0BBZy&usqp=CAc",
-//   },
-//   {
-//     name: "Lenovo ThinkPad X1",
-//     brand: "Lenovo",
-//     ram: "8GB",
-//     storage: "256GB",
-//     img: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTbqGO2yq5FBJB0lyKN-Zgf6dA-FIH56TP7QS4DLjwLD0YpTq_hOrYF7Z8Q2rlLBD7L-UfhKlibMUWXubAVAaCp-doB-clZTwT4-eXutZYWT8-GXWEEcrUJ0HIjtBdS3AGkxZGlsA&usqp=CAc",
-//   },
-//   {
-//     name: "MacBook Air M2",
-//     brand: "Apple",
-//     ram: "16GB",
-//     storage: "512GB",
-//     img: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSw4VvNtYGArx0AACGoHwcsHEWqiBplSOTJRu6nnBhZmqXGMedGan2SYDZ9O7vCVYhQtdCsE-OeBJGmz38T6BoMz53KjdMc2rcEPBFFn8-W9LQYxLDtmaxZF2cHEqeCuNDZnTh0BBZy&usqp=CAc",
-//   },
-//   {
-//     name: "Lenovo ThinkPad X1",
-//     brand: "Lenovo",
-//     ram: "8GB",
-//     storage: "256GB",
-//     img: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTbqGO2yq5FBJB0lyKN-Zgf6dA-FIH56TP7QS4DLjwLD0YpTq_hOrYF7Z8Q2rlLBD7L-UfhKlibMUWXubAVAaCp-doB-clZTwT4-eXutZYWT8-GXWEEcrUJ0HIjtBdS3AGkxZGlsA&usqp=CAc",
-//   },
-//   {
-//     name: "MacBook Air M2",
-//     brand: "Apple",
-//     ram: "16GB",
-//     storage: "512GB",
-//     img: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSw4VvNtYGArx0AACGoHwcsHEWqiBplSOTJRu6nnBhZmqXGMedGan2SYDZ9O7vCVYhQtdCsE-OeBJGmz38T6BoMz53KjdMc2rcEPBFFn8-W9LQYxLDtmaxZF2cHEqeCuNDZnTh0BBZy&usqp=CAc",
-//   },
-//   {
-//     name: "Dell XPS 13",
-//     brand: "Dell",
-//     ram: "16GB",
-//     storage: "512GB",
-//     img: "data:image/webp;base64,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",
-//   },
-//   {
-//     name: "HP Spectre x360",
-//     brand: "HP",
-//     ram: "16GB",
-//     storage: "1TB",
-//     img: "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcT1X1jMWbgeCOqEp02vrgycRNG4A1L1Zeo03FZeogyDTT1KVezqnfflNTg8XTur_691RAxqsrv89UFDmwiz1vi5w76aWv4mAV4bK-SLsIYjCFaFw5hr93188QRropC8unD70yaCWXYoWA&usqp=CAc",
-//   },
-//   {
-//     name: "Lenovo ThinkPad X1",
-//     brand: "Lenovo",
-//     ram: "8GB",
-//     storage: "256GB",
-//     img: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTbqGO2yq5FBJB0lyKN-Zgf6dA-FIH56TP7QS4DLjwLD0YpTq_hOrYF7Z8Q2rlLBD7L-UfhKlibMUWXubAVAaCp-doB-clZTwT4-eXutZYWT8-GXWEEcrUJ0HIjtBdS3AGkxZGlsA&usqp=CAc",
-//   },
-//   {
-//     name: "MacBook Air M2",
-//     brand: "Apple",
-//     ram: "16GB",
-//     storage: "512GB",
-//     img: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSw4VvNtYGArx0AACGoHwcsHEWqiBplSOTJRu6nnBhZmqXGMedGan2SYDZ9O7vCVYhQtdCsE-OeBJGmz38T6BoMz53KjdMc2rcEPBFFn8-W9LQYxLDtmaxZF2cHEqeCuNDZnTh0BBZy&usqp=CAc",
-//   },
-//   {
-//     name: "Lenovo ThinkPad X1",
-//     brand: "Lenovo",
-//     ram: "8GB",
-//     storage: "256GB",
-//     img: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTbqGO2yq5FBJB0lyKN-Zgf6dA-FIH56TP7QS4DLjwLD0YpTq_hOrYF7Z8Q2rlLBD7L-UfhKlibMUWXubAVAaCp-doB-clZTwT4-eXutZYWT8-GXWEEcrUJ0HIjtBdS3AGkxZGlsA&usqp=CAc",
-//   },
-//   {
-//     name: "MacBook Air M2",
-//     brand: "Apple",
-//     ram: "16GB",
-//     storage: "512GB",
-//     img: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSw4VvNtYGArx0AACGoHwcsHEWqiBplSOTJRu6nnBhZmqXGMedGan2SYDZ9O7vCVYhQtdCsE-OeBJGmz38T6BoMz53KjdMc2rcEPBFFn8-W9LQYxLDtmaxZF2cHEqeCuNDZnTh0BBZy&usqp=CAc",
-//   },
-//   {
-//     name: "Lenovo ThinkPad X1",
-//     brand: "Lenovo",
-//     ram: "8GB",
-//     storage: "256GB",
-//     img: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTbqGO2yq5FBJB0lyKN-Zgf6dA-FIH56TP7QS4DLjwLD0YpTq_hOrYF7Z8Q2rlLBD7L-UfhKlibMUWXubAVAaCp-doB-clZTwT4-eXutZYWT8-GXWEEcrUJ0HIjtBdS3AGkxZGlsA&usqp=CAc",
-//   },
-//   {
-//     name: "MacBook Air M2",
-//     brand: "Apple",
-//     ram: "16GB",
-//     storage: "512GB",
-//     img: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSw4VvNtYGArx0AACGoHwcsHEWqiBplSOTJRu6nnBhZmqXGMedGan2SYDZ9O7vCVYhQtdCsE-OeBJGmz38T6BoMz53KjdMc2rcEPBFFn8-W9LQYxLDtmaxZF2cHEqeCuNDZnTh0BBZy&usqp=CAc",
-//   },
-//   {
-//     name: "Lenovo ThinkPad X1",
-//     brand: "Lenovo",
-//     ram: "8GB",
-//     storage: "256GB",
-//     img: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTbqGO2yq5FBJB0lyKN-Zgf6dA-FIH56TP7QS4DLjwLD0YpTq_hOrYF7Z8Q2rlLBD7L-UfhKlibMUWXubAVAaCp-doB-clZTwT4-eXutZYWT8-GXWEEcrUJ0HIjtBdS3AGkxZGlsA&usqp=CAc",
-//   },
-//   {
-//     name: "MacBook Air M2",
-//     brand: "Apple",
-//     ram: "16GB",
-//     storage: "512GB",
-//     img: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSw4VvNtYGArx0AACGoHwcsHEWqiBplSOTJRu6nnBhZmqXGMedGan2SYDZ9O7vCVYhQtdCsE-OeBJGmz38T6BoMz53KjdMc2rcEPBFFn8-W9LQYxLDtmaxZF2cHEqeCuNDZnTh0BBZy&usqp=CAc",
-//   },
-//   {
-//     name: "Lenovo ThinkPad X1",
-//     brand: "Lenovo",
-//     ram: "8GB",
-//     storage: "256GB",
-//     img: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTbqGO2yq5FBJB0lyKN-Zgf6dA-FIH56TP7QS4DLjwLD0YpTq_hOrYF7Z8Q2rlLBD7L-UfhKlibMUWXubAVAaCp-doB-clZTwT4-eXutZYWT8-GXWEEcrUJ0HIjtBdS3AGkxZGlsA&usqp=CAc",
-//   },
-//   {
-//     name: "MacBook Air M2",
-//     brand: "Apple",
-//     ram: "16GB",
-//     storage: "512GB",
-//     img: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSw4VvNtYGArx0AACGoHwcsHEWqiBplSOTJRu6nnBhZmqXGMedGan2SYDZ9O7vCVYhQtdCsE-OeBJGmz38T6BoMz53KjdMc2rcEPBFFn8-W9LQYxLDtmaxZF2cHEqeCuNDZnTh0BBZy&usqp=CAc",
-//   },
-// ];
 let laptops = [];
 let currentPage = 1;
 const laptopsPerPage = 15;
 
 async function fetchLaptops(event) {
-  const brandFilter = document.getElementById("brand").value;
-  const ramFilter = document.getElementById("ram").value;
-  const storageFilter = document.getElementById("storage").value;
+  event.preventDefault();
 
-  if (
-    !brandFilter.trim() &&
-    !ramFilter.trim() &&
-    !storageFilter.trim() &&
-    event &&
-    event.type != "DOMContentLoaded"
-  ) {
-    showNotification("Please select atleast One Filter!");
+  console.log(event.target);
+
+  // Check if recommendation request
+  const isRecommendation =
+    event.type != "DOMContentLoaded" && event.target.closest(".recommend-btn");
+
+  if (isRecommendation) {
+    // Recommendation request payload
+    const recommendationData = {
+      brand: document.getElementById("brand").value || null,
+      usage: document.getElementById("usage").value || null,
+      priceRange: document.getElementById("price").value || null,
+      performanceLevel: document.getElementById("performance").value || null,
+      portability: document.getElementById("portability").value || null,
+      screenSize: parseFloat(document.getElementById("screen").value) || null,
+      minStorage: parseInt(document.getElementById("storage").value) || null,
+      minRam: parseInt(document.getElementById("ram").value) || null,
+    };
+    const allEmpty = Object.values(recommendationData).every(
+      (val) => val === null
+    );
+    if (allEmpty) {
+      showNotification("Please select at least one recommendation filter!");
+      return;
+    }
+
+    try {
+      const response = await postData("/laptops/recommendations", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(recommendationData),
+      });
+
+      laptops = response;
+      console.log(response);
+      
+      currentPage = 1;
+      displayLaptops();
+    } catch (error) {
+      console.error("Recommendation error:", error);
+      showNotification("Failed to get recommendations");
+    }
+    return;
   }
-  // let apiUrl = `http://localhost:8080/api/laptops?`;
-  if (brandFilter) apiUrl += `brand=${brandFilter}&`;
-  if (ramFilter) apiUrl += `ram=${ramFilter}&`;
-  if (storageFilter) apiUrl += `storage=${storageFilter}&`;
 
   try {
-    laptops=[];
+    laptops = [];
     const data = await fetchData("/laptops"); // Replace with your API URL
     console.log(data);
 
@@ -488,14 +77,13 @@ async function fetchLaptops(event) {
   }
 }
 
-
 function setupPagination() {
   const pagination = document.getElementById("pagination");
   pagination.innerHTML = "";
 
   const totalPages = Math.ceil(laptops.length / laptopsPerPage);
-  console.log(totalPages);  
-  
+  console.log(totalPages);
+
   // Previous Button
   pagination.innerHTML += `<button onclick="goToPage(${currentPage - 1})" ${
     currentPage === 1 ? "disabled" : ""
@@ -618,7 +206,7 @@ function addTabClickListeners() {
       // Set search input value
       searchInput.value = searchTerm;
 
-      laptops= [];
+      laptops = [];
       // Perform the search
       const data = await fetchData("/laptops/" + searchTerm); // Replace with your API URL
       console.log(data);
@@ -653,17 +241,66 @@ document.addEventListener("DOMContentLoaded", async function (event) {
 
 function showLaptopDetails(laptop) {
   const modal = document.getElementById("laptopModal");
+  const features = [];
+
+  if (laptop.specialFeatures.facialRecognition)
+    features.push("Facial Recognition");
+  if (laptop.specialFeatures.isConvertible) features.push("Convertible Design");
+  if (laptop.specialFeatures.backlitKeyboard) features.push("Backlit Keyboard");
 
   document.getElementById("modalImage").src = laptop.imageURL;
   document.getElementById("modalName").textContent = laptop.model;
   document.getElementById("modalBrand").textContent = laptop.brand;
   document.getElementById("modalPrice").textContent = laptop.price;
-  document.getElementById("modalProcessor").textContent =
-    laptop.processor.brand;
+  document.getElementById("modalOS").textContent = laptop.operatingSystem;
+
+  document.getElementById(
+    "modalProcessor"
+  ).textContent = `${laptop.processor.brand} ${laptop.processor.model} (${laptop.processor.speedGHz}GHz)`;
+
+  document.getElementById(
+    "modalRAM"
+  ).textContent = `${laptop.memory.sizeGB}GB ${laptop.memory.type}`;
+
+  document.getElementById(
+    "modalStorage"
+  ).textContent = `${laptop.storage.capacityGB}GB ${laptop.storage.type}`;
+
+  document.getElementById(
+    "modalGraphics"
+  ).textContent = `${laptop.graphics.brand} ${laptop.graphics.model} (${laptop.graphics.type})`;
+
+  document.getElementById(
+    "modalDisplaySize"
+  ).textContent = `${laptop.display.sizeInches}"`;
+
+  document.getElementById("modalResolution").textContent =
+    laptop.display.resolution;
+
+  document.getElementById(
+    "modalBattery"
+  ).textContent = `${laptop.battery.capacityWh}Wh (${laptop.battery.estimatedUsageTime})`;
+
+  document.getElementById(
+    "modalWeight"
+  ).textContent = `${laptop.buildQuality.weightKg}kg`;
+
+  document.getElementById("modalMaterial").textContent =
+    laptop.buildQuality.material;
+
+  document.getElementById("modalFeatures").textContent =
+    features.join(", ") || "None";
+
   modal.style.display = "flex";
   modal.style.backdropFilter = "blur(3px)";
 }
 
+window.onclick = function (event) {
+  const modal = document.getElementById("laptopModal");
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+};
 // Close modal functionality
 document.querySelector(".close-modal").addEventListener("click", () => {
   document.getElementById("laptopModal").style.display = "none";
@@ -691,7 +328,6 @@ function displayLaptops() {
 
   setupPagination();
 
-
   if (paginatedLaptops.length === 0) {
     laptopList.innerHTML = `
     <div class="no-results">
@@ -706,17 +342,91 @@ function displayLaptops() {
     const card = document.createElement("div");
     card.className = "laptop-card";
     card.innerHTML = `
-    <img src="${laptop.imageURL}" alt="img">
-    <h3>${laptop.model}</h3>
-    <p>Brand: ${laptop.brand}</p>
-    <p>Price: ${laptop.price}</p>
-    <p>Processor: ${laptop.processor.brand}</p>
-`;
+    <div class="card-header">
+        <img src="${laptop.imageURL}" alt="${laptop.model}">
+        <h2 class='laptop-model'>${laptop.model}</h2>
+        <div class="price">${
+          laptop.price.startsWith("$") ? laptop.price : "$" + laptop.price
+        }</div>
+    </div>
+    
+    <div class="specs">
+        <div class="spec-group">
+            <h3><i class="fa-solid fa-microchip"></i> Processor</h3>
+            <p>${laptop.processor.brand} ${laptop.processor.model}</p>
+            <p>${laptop.processor.speedGHz}GHz · ${
+      laptop.processor.cores
+    }-core</p>
+        </div>
+
+        <div class="spec-group">
+            <h3><i class="fa-solid fa-memory"></i> Memory & Storage</h3>
+            <p>${laptop.memory.sizeGB}GB ${laptop.memory.type}</p>
+            <p>${laptop.storage.type} ${laptop.storage.capacityGB}GB</p>
+        </div>
+
+   
+
+        <div class="spec-group">
+            <h3><i class="fa-solid fa-gears"></i> Graphics</h3>
+            <p>${laptop.graphics.brand} ${laptop.graphics.model}</p>
+            <p>${laptop.graphics.type}</p>
+        </div>
+
+       
+    </div>
+
+    <div class="features">
+        ${
+          laptop.specialFeatures.backlitKeyboard
+            ? '<span class="feature-tag"><i class="fa-solid fa-keyboard"></i> Backlit KB</span>'
+            : ""
+        }
+        ${
+          laptop.specialFeatures.fingerprintReader
+            ? '<span class="feature-tag"><i class="fa-solid fa-fingerprint"></i> Fingerprint</span>'
+            : ""
+        }
+        ${
+          laptop.specialFeatures.facialRecognition
+            ? '<span class="feature-tag"><i class="fa-solid fa-face-smile"></i> Face Unlock</span>'
+            : ""
+        }
+        ${
+          laptop.specialFeatures.isConvertible
+            ? '<span class="feature-tag"><i class="fa-solid fa-rotate"></i> Convertible</span>'
+            : ""
+        }
+    </div>
+    `;
+    card.innerHTML =
+      `<input type="checkbox" class="compare-checkbox" 
+           data-model="${laptop.model}" 
+           style="display: ${compareMode ? "block" : "none"}">` +
+      card.innerHTML;
+
+    // Add click handler for the checkbox
+    const checkbox = card.querySelector(".compare-checkbox");
+
+    // Add checkbox event handler
+    checkbox.addEventListener("click", (e) => {
+      e.stopPropagation(); // Prevent event from bubbling to card
+    });
+    checkbox.addEventListener("change", function () {
+      const laptopModel = this.dataset.model;
+      if (this.checked) {
+        selectedLaptops.push(laptopModel);
+      } else {
+        selectedLaptops = selectedLaptops.filter(
+          (model) => model !== laptopModel
+        );
+      }
+      updateCompareButton();
+    });
+    card.style.marginBottom = "10px";
     card.addEventListener("click", () => showLaptopDetails(laptop));
     laptopList.appendChild(card);
   });
-  
-
 }
 
 // document
@@ -815,7 +525,7 @@ searchInput.addEventListener("keydown", async (e) => {
         showNotification("Please enter a search query!");
         e.preventDefault();
       } else {
-        laptops= [];
+        laptops = [];
         const data = await fetchData("/laptops/" + searchValue); // Replace with your API URL
         console.log(data);
 
@@ -925,3 +635,119 @@ async function showSearchCount(length) {
   }
   // Show/hide search meta
 }
+// Add to JavaScript
+let compareMode = false;
+let selectedLaptops = [];
+// Proper compare mode toggle handler
+document.getElementById("toggleCompareMode").addEventListener("click", () => {
+  compareMode = !compareMode;
+  document.querySelectorAll(".compare-checkbox").forEach((checkbox) => {
+    checkbox.style.display = compareMode ? "block" : "none";
+  });
+  document
+    .getElementById("compareSelected")
+    .classList.toggle("hidden", !compareMode);
+  if (!compareMode) {
+    selectedLaptops = [];
+    updateCompareButton();
+  }
+});
+
+function updateCompareButton() {
+  const compareBtn = document.getElementById("compareSelected");
+  compareBtn.textContent = `Compare (${selectedLaptops.length})`;
+  compareBtn.disabled = selectedLaptops.length < 2;
+}
+
+// Updated showComparison function
+function showComparison() {
+  if (selectedLaptops.length < 2 || selectedLaptops.length > 4) {
+    showNotification("Please select 2-4 laptops to compare");
+    return;
+  }
+
+  const modal = document.getElementById("comparisonModal");
+  const imagesRow = modal.querySelector(".comparison-images-row");
+  const modelsRow = modal.querySelector(".models-row");
+  const tbody = modal.querySelector("tbody");
+
+  // Clear existing content
+  imagesRow.innerHTML = "";
+  modelsRow.innerHTML = "<th>Features</th>";
+  tbody.innerHTML = "";
+
+  // Get selected laptops data from ALL laptops
+  const selected = laptops.filter((l) => selectedLaptops.includes(l.model));
+
+  imagesRow.innerHTML += `
+  <img class="comparison-image">`;
+  // Add images and model names
+  selected.forEach((laptop) => {
+    // Add image
+    imagesRow.innerHTML += `
+      <img src="${laptop.imageURL}" 
+           alt="${laptop.model}" 
+           class="comparison-image">`;
+
+    // Add model name
+    modelsRow.innerHTML += `
+      <th>
+        <div>${laptop.brand}</div>
+        <div>${laptop.model}</div>
+      </th>`;
+  });
+
+  // Comparison rows (same features array as before)
+  const features = [
+    { label: "Price", value: (l) => l.price },
+    {
+      label: "Processor",
+      value: (l) =>
+        `${l.processor.brand} ${l.processor.model} (${l.processor.speedGHz}GHz)`,
+    },
+    { label: "RAM", value: (l) => `${l.memory.sizeGB}GB ${l.memory.type}` },
+    {
+      label: "Storage",
+      value: (l) => `${l.storage.capacityGB}GB ${l.storage.type}`,
+    },
+    {
+      label: "Display",
+      value: (l) =>
+        `${l.display.sizeInches}" ${l.display.resolution} ${
+          l.display.isTouchscreen ? "(Touch)" : ""
+        }`,
+    },
+    {
+      label: "Graphics",
+      value: (l) =>
+        `${l.graphics.brand} ${l.graphics.model} (${l.graphics.type})`,
+    },
+    {
+      label: "Battery",
+      value: (l) =>
+        `${l.battery.capacityWh}Wh (${l.battery.estimatedUsageTime})`,
+    },
+    { label: "Weight", value: (l) => `${l.buildQuality.weightKg}kg` },
+  ];
+
+  features.forEach((feature) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `<td>${feature.label}</td>`;
+    selected.forEach((laptop) => {
+      row.innerHTML += `<td>${feature.value(laptop)}</td>`;
+    });
+    tbody.appendChild(row);
+  });
+
+  modal.style.display = "flex";
+}
+
+// Update the compare button initialization (put this at bottom)
+document
+  .getElementById("compareSelected")
+  .addEventListener("click", showComparison);
+
+document.querySelector(".close-comparison").addEventListener("click", () => {
+  selectedLaptops = [];
+  document.getElementById("comparisonModal").style.display = "none";
+});

@@ -2,21 +2,23 @@ package com.LaptopRecommendationSystem.Backend.API.Controller;
 
 
 import com.LaptopRecommendationSystem.Backend.API.Config.CSVFileConfig;
+import com.LaptopRecommendationSystem.Backend.API.Model.FilterDetails;
 import com.LaptopRecommendationSystem.Backend.API.Model.LaptopDetail;
 import com.LaptopRecommendationSystem.Backend.API.ResourceFiles.StringConstants;
 import com.LaptopRecommendationSystem.Backend.API.Services.AlternateSuggestions;
 import com.LaptopRecommendationSystem.Backend.API.Services.SearchFrequency;
 import com.LaptopRecommendationSystem.Backend.API.Services.WordCompletion;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static com.LaptopRecommendationSystem.Backend.API.Model.LaptopDetail.*;
 import static com.LaptopRecommendationSystem.Backend.API.Services.SearchFrequency.tracker;
 import static com.LaptopRecommendationSystem.Backend.API.Services.WordCompletion.wordTree;
 
@@ -45,13 +47,13 @@ public class LaptopController {
 
 //        tracker.loadSearchQueries(StringConstants.FILEPATH);
         // Simulate user searches
-        if(tracker == null){
-            tracker= new SearchFrequency();
+        if (tracker == null) {
+            tracker = new SearchFrequency();
             tracker.createTreeFromTXT(StringConstants.SEARCHCONSTANTSPATH);
         }
         try {
-            FileWriter writer = new FileWriter(StringConstants.SEARCHCONSTANTSPATH,true);
-            writer.write(searchTerm+"\n"); // Writing a single word
+            FileWriter writer = new FileWriter(StringConstants.SEARCHCONSTANTSPATH, true);
+            writer.write(searchTerm + "\n"); // Writing a single word
             writer.close();
             System.out.println("Successfully written to the file.");
         } catch (IOException e) {
@@ -65,7 +67,42 @@ public class LaptopController {
                         matchesProperty(laptop.brand, searchTerm) ||
                                 matchesProperty(laptop.model, searchTerm) ||
                                 matchesProperty(String.valueOf(laptop.price), searchTerm) ||
-                                matchesProperty(laptop.processor.brand, searchTerm)
+                                matchesProperty(laptop.processor.brand, searchTerm) ||
+                                matchesProperty(laptop.processor.model, searchTerm) ||
+                                matchesProperty(String.valueOf(laptop.processor.speedGHz), searchTerm) ||
+                                matchesProperty(String.valueOf(laptop.processor.cores), searchTerm) ||
+                                matchesProperty(String.valueOf(laptop.memory.sizeGB), searchTerm) ||
+                                matchesProperty(laptop.memory.type, searchTerm) ||
+                                matchesProperty(laptop.storage.type, searchTerm) ||
+                                matchesProperty(String.valueOf(laptop.storage.capacityGB), searchTerm) ||
+                                matchesProperty(String.valueOf(laptop.display.sizeInches), searchTerm) ||
+                                matchesProperty(String.valueOf(laptop.display.resolution), searchTerm) ||
+                                matchesProperty(String.valueOf(laptop.display.refreshRateHz), searchTerm) ||
+                                matchesProperty(String.valueOf(laptop.battery.capacityWh), searchTerm) ||
+                                matchesProperty(String.valueOf(laptop.battery.estimatedUsageTime), searchTerm)
+                                ||
+                                matchesProperty(laptop.graphics.type, searchTerm)
+                                ||
+                                matchesProperty(laptop.graphics.brand, searchTerm)
+                                ||
+                                matchesProperty(laptop.graphics.model, searchTerm)
+                                ||
+                                matchesProperty(laptop.audio.speakerDescription, searchTerm)
+                                ||
+                                matchesProperty(laptop.audio.microphoneQuality, searchTerm)
+                                ||
+                                matchesProperty(laptop.connectivity.wifiStandard, searchTerm)
+                                ||
+                                matchesProperty(laptop.connectivity.bluetoothVersion, searchTerm)
+                                ||
+                                matchesProperty(String.valueOf(laptop.buildQuality.weightKg), searchTerm)
+                                ||
+                                matchesProperty(laptop.buildQuality.material, searchTerm)
+                                ||
+                                matchesProperty(laptop.buildQuality.durabilityRating, searchTerm)
+                                ||
+                                matchesProperty(laptop.operatingSystem, searchTerm)
+
                 )
                 .collect(Collectors.toList());
     }
@@ -100,14 +137,15 @@ public class LaptopController {
     }
 
     @GetMapping("/laptops/searchFrequency")
-    public List<Map.Entry<String,Integer>> getSearchFrequencyofTopNWords() throws IOException {
-        if(tracker == null){
-            tracker= new SearchFrequency();
+    public List<Map.Entry<String, Integer>> getSearchFrequencyofTopNWords() throws IOException {
+        if (tracker == null) {
+            tracker = new SearchFrequency();
             tracker.createTreeFromTXT(StringConstants.SEARCHCONSTANTSPATH);
         }
 
         return tracker.getTopSearches(10);
     }
+
     @GetMapping("/laptops/searchFrequency/{word}")
     public Integer getSearchFrequencyofWord(@PathVariable String word) throws IOException {
         String searchTerm = word.trim().toLowerCase();
@@ -115,5 +153,23 @@ public class LaptopController {
         return tracker.getSearchCount(searchTerm);
     }
 
+    @PostMapping("/laptops/recommendations")
+    public ResponseEntity<List<LaptopDetail>> getRecommendations(
+            @RequestBody FilterDetails.RecommendationRequest request) {
 
+        System.out.println("Hellow ");
+        List<LaptopDetail> filtered = laptops.stream()
+                .filter(l -> filterBrand(l, request.getBrand()))
+                .filter(l -> filterPrice(l, request.getPriceRange()))
+                .filter(l -> filterPerformance(l, request.getPerformanceLevel()))
+                .filter(l -> filterPortability(l, request.getPortability()))
+                .filter(l -> filterScreenSize(l, request.getScreenSize()))
+                .filter(l -> filterStorage(l, request.getMinStorage()))
+                .filter(l -> filterRam(l, request.getMinRam()))
+                .sorted(Comparator.comparingDouble(l ->
+                        calculateScore(l, request.getUsage(), request.getPerformanceLevel())))
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(filtered);
+    }
 }

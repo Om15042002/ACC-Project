@@ -17,6 +17,7 @@ async function postData(path, data) {
 
         const responseData = await response.json();
         console.log(responseData); // Handle the response data here
+        return responseData;
     } catch (error) {
         console.error('Error:', error); // Handle any errors here
     }
