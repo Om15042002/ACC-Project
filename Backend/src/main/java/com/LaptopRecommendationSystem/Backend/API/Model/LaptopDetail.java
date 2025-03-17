@@ -5,6 +5,7 @@ import java.util.List;
 //Represents all the properties of a laptop
 public class LaptopDetail {
 
+    public String id;
     public String model;
     public String brand;
     public String price;
@@ -151,11 +152,11 @@ public class LaptopDetail {
     }
 
     public static boolean filterStorage(LaptopDetail laptop, Integer storage) {
-        return storage == null || laptop.storage.capacityGB >= storage;
+        return storage == null || laptop.storage.capacityGB == storage;
     }
 
     public static boolean filterRam(LaptopDetail laptop, Integer ram) {
-        return ram == null || laptop.memory.sizeGB >= ram;
+        return ram == null || laptop.memory.sizeGB == ram;
     }
     public static boolean filterScreenSize(LaptopDetail laptop, Double screen) {
         if (screen == null) return true;

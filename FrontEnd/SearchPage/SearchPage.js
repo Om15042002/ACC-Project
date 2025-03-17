@@ -38,17 +38,11 @@ async function fetchLaptops(event) {
     }
 
     try {
-      const response = await postData("/laptops/recommendations", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(recommendationData),
-      });
+      const response = await postData("/laptops/recommendations", recommendationData);
 
       laptops = response;
       console.log(response);
-      
+
       currentPage = 1;
       displayLaptops();
     } catch (error) {
@@ -401,7 +395,7 @@ function displayLaptops() {
     `;
     card.innerHTML =
       `<input type="checkbox" class="compare-checkbox" 
-           data-model="${laptop.model}" 
+           data-model="${laptop.id}" 
            style="display: ${compareMode ? "block" : "none"}">` +
       card.innerHTML;
 
@@ -413,7 +407,11 @@ function displayLaptops() {
       e.stopPropagation(); // Prevent event from bubbling to card
     });
     checkbox.addEventListener("change", function () {
+      console.log(this.dataset);
+
       const laptopModel = this.dataset.model;
+      console.log(laptopModel);
+
       if (this.checked) {
         selectedLaptops.push(laptopModel);
       } else {
@@ -676,11 +674,16 @@ function showComparison() {
   modelsRow.innerHTML = "<th>Features</th>";
   tbody.innerHTML = "";
 
-  // Get selected laptops data from ALL laptops
-  const selected = laptops.filter((l) => selectedLaptops.includes(l.model));
+  console.log(selectedLaptops);
 
-  imagesRow.innerHTML += `
-  <img class="comparison-image">`;
+  // Get selected laptops data from ALL laptops
+  const selected = laptops.filter((l) => selectedLaptops.includes(l.id));
+  console.log(selectedLaptops);
+
+  console.log(selected);
+
+  // imagesRow.innerHTML += `
+  // <img class="comparison-image">`;
   // Add images and model names
   selected.forEach((laptop) => {
     // Add image
@@ -749,5 +752,15 @@ document
 
 document.querySelector(".close-comparison").addEventListener("click", () => {
   selectedLaptops = [];
+  // Select all checkboxes with the class "compare-checkbox"
+  const checkboxes = document.querySelectorAll(".compare-checkbox");
+
+  // Loop through each checkbox and set display to "none"
+  checkboxes.forEach((checkbox) => {
+    checkbox.style.display = "none";
+    checkbox.checked = false;         // Untick the checkbox
+ 
+  });
+  updateCompareButton();
   document.getElementById("comparisonModal").style.display = "none";
 });

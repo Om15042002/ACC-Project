@@ -2,6 +2,7 @@ package com.LaptopRecommendationSystem.Backend.API.Controller;
 
 
 import com.LaptopRecommendationSystem.Backend.API.Config.CSVFileConfig;
+import com.LaptopRecommendationSystem.Backend.API.Config.JSONFileConfig;
 import com.LaptopRecommendationSystem.Backend.API.Model.FilterDetails;
 import com.LaptopRecommendationSystem.Backend.API.Model.LaptopDetail;
 import com.LaptopRecommendationSystem.Backend.API.ResourceFiles.StringConstants;
@@ -29,7 +30,7 @@ public class LaptopController {
     private final List<LaptopDetail> laptops;
 
     public LaptopController() {
-        this.laptops = new CSVFileConfig().FileRecords();
+        this.laptops = JSONFileConfig.readJsonFile();
     }
 
     @GetMapping("/laptops")
@@ -157,7 +158,9 @@ public class LaptopController {
     public ResponseEntity<List<LaptopDetail>> getRecommendations(
             @RequestBody FilterDetails.RecommendationRequest request) {
 
-        System.out.println("Hellow ");
+        System.out.println(request.getBrand());
+
+
         List<LaptopDetail> filtered = laptops.stream()
                 .filter(l -> filterBrand(l, request.getBrand()))
                 .filter(l -> filterPrice(l, request.getPriceRange()))
