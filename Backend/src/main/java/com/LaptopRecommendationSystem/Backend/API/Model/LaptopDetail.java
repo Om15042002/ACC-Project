@@ -10,6 +10,7 @@ public class LaptopDetail {
     public String brand;
     public String price;
     public String imageURL;
+    public String productURL;
 
     //below properties are nested
     public Processor processor;

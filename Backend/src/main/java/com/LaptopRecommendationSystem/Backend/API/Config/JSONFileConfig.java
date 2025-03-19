@@ -39,6 +39,7 @@ public class JSONFileConfig {
                     // Here we convert to string to align with your CSV version.
                     laptop.price = node.get("Price").asText();
                     laptop.imageURL = node.get("ImageURL").asText();
+                    laptop.productURL = node.get("ProductURL").asText();
 
                     // Processor Information
                     laptop.processor = laptop.new Processor();

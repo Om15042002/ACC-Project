@@ -112,187 +112,196 @@
     <div class="overlay" id="overlay" onclick="toggleFilterPanel()"></div>
     <div class="filter-panel" id="filterPanel">
       <button class="close-btn" onclick="toggleFilterPanel()">&times;</button>
-      <h2 style="font-size: 24px; margin-bottom: 10px">Recommendation Filters</h2>
+      <h2 style="font-size: 24px; margin-bottom: 10px">
+        Recommendation Filters
+      </h2>
       <div class="filter-bar">
-          <!-- Brand Selection -->
-          <div class="filter-group">
-              <label>Preferred Brand:</label>
-              <select id="brand">
-                  <option value="">Any Brand</option>
-                  <option value="Apple">Apple</option>
-                  <option value="Dell">Dell</option>
-                  <option value="HP">HP</option>
-                  <option value="Lenovo">Lenovo</option>
-                  <option value="ASUS">ASUS</option>
-              </select>
-          </div>
-  
-          <!-- Usage Type -->
-          <div class="filter-group">
-              <label>Primary Usage:</label>
-              <select id="usage">
-                  <option value="">Select Usage</option>
-                  <option value="gaming">Gaming</option>
-                  <option value="productivity">Productivity</option>
-                  <option value="design">Graphic Design</option>
-                  <option value="casual">Casual Use</option>
-              </select>
-          </div>
-  
-          <!-- Price Range -->
-          <div class="filter-group">
-              <label>Budget Range:</label>
-              <select id="price">
-                  <option value="">Any Price</option>
-                  <option value="500-1000">$500 - $1000</option>
-                  <option value="1000-1500">$1000 - $1500</option>
-                  <option value="1500-2000">$1500 - $2000</option>
-                  <option value="2000+">Premium ($2000+)</option>
-              </select>
-          </div>
-  
-          <!-- Performance Needs -->
-          <div class="filter-group">
-              <label>Performance Needs:</label>
-              <select id="performance">
-                  <option value="">Select Intensity</option>
-                  <option value="high">High (Gaming/Video Editing)</option>
-                  <option value="medium">Medium (Multitasking)</option>
-                  <option value="low">Light (Browsing/Office)</option>
-              </select>
-          </div>
-  
-          <!-- Portability -->
-          <div class="filter-group">
-              <label>Portability:</label>
-              <select id="portability">
-                  <option value="">Any</option>
-                  <option value="lightweight">Lightweight (<1.5kg)</option>
-                  <option value="battery">Long Battery Life (>8hrs)</option>
-                  <option value="both">Both</option>
-              </select>
-          </div>
-  
-          <!-- Screen Size -->
-          <div class="filter-group">
-              <label>Screen Size:</label>
-              <select id="screen">
-                  <option value="">Any Size</option>
-                  <option value="13">13" or smaller</option>
-                  <option value="15">14-15"</option>
-                  <option value="17">16" or larger</option>
-              </select>
-          </div>
-  
-          <!-- Storage -->
-          <div class="filter-group">
-              <label>Minimum Storage:</label>
-              <select id="storage">
-                  <option value="">Any Storage</option>
-                  <option value="256">256GB</option>
-                  <option value="512">512GB</option>
-                  <option value="1024">1TB</option>
-              </select>
-          </div>
-  
-          <!-- RAM -->
-          <div class="filter-group">
-              <label>Minimum RAM:</label>
-              <select id="ram">
-                  <option value="">Any RAM</option>
-                  <option value="8">8GB</option>
-                  <option value="16">16GB</option>
-                  <option value="32">32GB</option>
-              </select>
-          </div>
-  
+        <!-- Brand Selection -->
+        <div class="filter-group">
+          <label>Preferred Brand:</label>
+          <select id="brand">
+            <option value="">Any Brand</option>
+            <option value="Apple">Apple</option>
+            <option value="Dell">Dell</option>
+            <option value="HP">HP</option>
+            <option value="Lenovo">Lenovo</option>
+            <option value="ASUS">ASUS</option>
+          </select>
+        </div>
+
+        <!-- Usage Type -->
+        <div class="filter-group">
+          <label>Primary Usage:</label>
+          <select id="usage">
+            <option value="">Select Usage</option>
+            <option value="gaming">Gaming</option>
+            <option value="productivity">Productivity</option>
+            <option value="design">Graphic Design</option>
+            <option value="casual">Casual Use</option>
+          </select>
+        </div>
+
+        <!-- Price Range -->
+        <div class="filter-group">
+          <label>Budget Range:</label>
+          <select id="price">
+            <option value="">Any Price</option>
+            <option value="500-1000">$500 - $1000</option>
+            <option value="1000-1500">$1000 - $1500</option>
+            <option value="1500-2000">$1500 - $2000</option>
+            <option value="2000+">Premium ($2000+)</option>
+          </select>
+        </div>
+
+        <!-- Performance Needs -->
+        <div class="filter-group">
+          <label>Performance Needs:</label>
+          <select id="performance">
+            <option value="">Select Intensity</option>
+            <option value="high">High (Gaming/Video Editing)</option>
+            <option value="medium">Medium (Multitasking)</option>
+            <option value="low">Light (Browsing/Office)</option>
+          </select>
+        </div>
+
+        <!-- Portability -->
+        <div class="filter-group">
+          <label>Portability:</label>
+          <select id="portability">
+            <option value="">Any</option>
+            <option value="lightweight">Lightweight (<1.5kg)</option>
+            <option value="battery">Long Battery Life (>8hrs)</option>
+            <option value="both">Both</option>
+          </select>
+        </div>
+
+        <!-- Screen Size -->
+        <div class="filter-group">
+          <label>Screen Size:</label>
+          <select id="screen">
+            <option value="">Any Size</option>
+            <option value="13">13" or smaller</option>
+            <option value="15">14-15"</option>
+            <option value="17">16" or larger</option>
+          </select>
+        </div>
+
+        <!-- Storage -->
+        <div class="filter-group">
+          <label>Minimum Storage:</label>
+          <select id="storage">
+            <option value="">Any Storage</option>
+            <option value="256">256GB</option>
+            <option value="512">512GB</option>
+            <option value="1024">1TB</option>
+          </select>
+        </div>
+
+        <!-- RAM -->
+        <div class="filter-group">
+          <label>Minimum RAM:</label>
+          <select id="ram">
+            <option value="">Any RAM</option>
+            <option value="8">8GB</option>
+            <option value="16">16GB</option>
+            <option value="32">32GB</option>
+          </select>
+        </div>
+
+      
+        <div class="button-container">
+          <button class="clear-btn" onclick="clearFilters()">
+              <i class="fas fa-sync-alt"></i> Clear Filters
+          </button>
           <button class="recommend-btn" onclick="fetchLaptops(event)">
               <i class="fas fa-magic"></i> Get Recommendations
           </button>
       </div>
-  </div>
+      </div>
+    </div>
 
     <div class="laptop-modal" id="laptopModal">
       <div class="modal-content">
-          <span class="close-modal">&times;</span>
-          <img id="modalImage" src="" alt="Laptop Image" />
-          <h2 id="modalName" style="margin: 0 0 20px 0; color: #2a9d8f"></h2>
-          
-          <div class="modal-details">
-              <!-- Basic Info -->
-              <div class="detail-section">
-                  <h3><i class="fas fa-info-circle"></i> Basic Information</h3>
-                  <div class="detail-item">
-                      <span>Brand</span>
-                      <span id="modalBrand"></span>
-                  </div>
-                  <div class="detail-item">
-                      <span>Price</span>
-                      <span id="modalPrice"></span>
-                  </div>
-                  <div class="detail-item">
-                      <span>Operating System</span>
-                      <span id="modalOS"></span>
-                  </div>
-              </div>
-  
-              <!-- Performance -->
-              <div class="detail-section">
-                  <h3><i class="fas fa-tachometer-alt"></i> Performance</h3>
-                  <div class="detail-item">
-                      <span>Processor</span>
-                      <span id="modalProcessor"></span>
-                  </div>
-                  <div class="detail-item">
-                      <span>RAM</span>
-                      <span id="modalRAM"></span>
-                  </div>
-                  <div class="detail-item">
-                      <span>Storage</span>
-                      <span id="modalStorage"></span>
-                  </div>
-                  <div class="detail-item">
-                      <span>Graphics</span>
-                      <span id="modalGraphics"></span>
-                  </div>
-              </div>
-  
-              <!-- Display & Battery -->
-              <div class="detail-section">
-                  <h3><i class="fas fa-desktop"></i> Display & Battery</h3>
-                  <div class="detail-item">
-                      <span>Screen Size</span>
-                      <span id="modalDisplaySize"></span>
-                  </div>
-                  <div class="detail-item">
-                      <span>Resolution</span>
-                      <span id="modalResolution"></span>
-                  </div>
-                  <div class="detail-item">
-                      <span>Battery Capacity</span>
-                      <span id="modalBattery"></span>
-                  </div>
-              </div>
-  
-              <!-- Build & Features -->
-              <div class="detail-section">
-                  <h3><i class="fas fa-cube"></i> Build & Features</h3>
-                  <div class="detail-item">
-                      <span>Weight</span>
-                      <span id="modalWeight"></span>
-                  </div>
-                  <div class="detail-item">
-                      <span>Material</span>
-                      <span id="modalMaterial"></span>
-                  </div>
-                  <div class="detail-item">
-                      <span>Special Features</span>
-                      <span id="modalFeatures"></span>
-                  </div>
-              </div>
+        <span class="close-modal">&times;</span>
+        <img id="modalImage" src="" alt="Laptop Image" />
+        <h2 id="modalName" style="margin: 0 0 20px 0; color: #2a9d8f"></h2>
+
+        <div class="modal-details">
+          <!-- Basic Info -->
+          <div class="detail-section">
+            <h3><i class="fas fa-info-circle"></i> Basic Information</h3>
+            <div class="detail-item">
+              <span>Brand</span>
+              <span id="modalBrand"></span>
+            </div>
+            <div class="detail-item">
+              <span>Price</span>
+              <span id="modalPrice"></span>
+            </div>
+            <div class="detail-item">
+              <span>Operating System</span>
+              <span id="modalOS"></span>
+            </div>
           </div>
+
+          <!-- Performance -->
+          <div class="detail-section">
+            <h3><i class="fas fa-tachometer-alt"></i> Performance</h3>
+            <div class="detail-item">
+              <span>Processor</span>
+              <span id="modalProcessor"></span>
+            </div>
+            <div class="detail-item">
+              <span>RAM</span>
+              <span id="modalRAM"></span>
+            </div>
+            <div class="detail-item">
+              <span>Storage</span>
+              <span id="modalStorage"></span>
+            </div>
+            <div class="detail-item">
+              <span>Graphics</span>
+              <span id="modalGraphics"></span>
+            </div>
+          </div>
+
+          <!-- Display & Battery -->
+          <div class="detail-section">
+            <h3><i class="fas fa-desktop"></i> Display & Battery</h3>
+            <div class="detail-item">
+              <span>Screen Size</span>
+              <span id="modalDisplaySize"></span>
+            </div>
+            <div class="detail-item">
+              <span>Resolution</span>
+              <span id="modalResolution"></span>
+            </div>
+            <div class="detail-item">
+              <span>Battery Capacity</span>
+              <span id="modalBattery"></span>
+            </div>
+          </div>
+
+          <!-- Build & Features -->
+          <div class="detail-section">
+            <h3><i class="fas fa-cube"></i> Build & Features</h3>
+            <div class="detail-item">
+              <span>Weight</span>
+              <span id="modalWeight"></span>
+            </div>
+            <div class="detail-item">
+              <span>Material</span>
+              <span id="modalMaterial"></span>
+            </div>
+            <div class="detail-item">
+              <span>Special Features</span>
+              <span id="modalFeatures"></span>
+            </div>
+          </div>
+        </div>
+        <button id="crawlButton" class="crawl-button">Crawl This</button>
       </div>
-  </div>
+    </div>
 
     <div class="notification" id="notification">
       <div class="notification-content">

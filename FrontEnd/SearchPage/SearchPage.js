@@ -32,13 +32,16 @@ async function fetchLaptops(event) {
     const allEmpty = Object.values(recommendationData).every(
       (val) => val === null
     );
-    if (allEmpty) {
-      showNotification("Please select at least one recommendation filter!");
-      return;
-    }
+    // if (allEmpty) {
+    //   showNotification("Please select at least one recommendation filter!");
+    //   return;
+    // }
 
     try {
-      const response = await postData("/laptops/recommendations", recommendationData);
+      const response = await postData(
+        "/laptops/recommendations",
+        recommendationData
+      );
 
       laptops = response;
       console.log(response);
@@ -601,7 +604,7 @@ async function handleSubmit() {
   const suggestions = await fetchSpellCheck("/laptops/spellcheck/" + query); // Replace with your API URL
   console.log(suggestions);
   // Update suggestion UI
-  if (suggestions.length > 0) {
+  if (suggestions.length > 0 && laptops.length === 0) {
     suggestionText.textContent = suggestions[0];
     suggestionBox.classList.add("show");
   } else {
@@ -654,13 +657,14 @@ document.getElementById("toggleCompareMode").addEventListener("click", () => {
 function updateCompareButton() {
   const compareBtn = document.getElementById("compareSelected");
   compareBtn.textContent = `Compare (${selectedLaptops.length})`;
-  compareBtn.disabled = selectedLaptops.length < 2;
+  // compareBtn.disabled = selectedLaptops.length < 2;
 }
 
 // Updated showComparison function
 function showComparison() {
-  if (selectedLaptops.length < 2 || selectedLaptops.length > 4) {
-    showNotification("Please select 2-4 laptops to compare");
+  
+  if (selectedLaptops.length < 2 ) {
+    showNotification("Please select at least 2 laptops to compare");
     return;
   }
 
@@ -671,7 +675,7 @@ function showComparison() {
 
   // Clear existing content
   imagesRow.innerHTML = "";
-  modelsRow.innerHTML = "<th>Features</th>";
+  modelsRow.innerHTML = "<th >Features</th>";
   tbody.innerHTML = "";
 
   console.log(selectedLaptops);
@@ -685,19 +689,22 @@ function showComparison() {
   // imagesRow.innerHTML += `
   // <img class="comparison-image">`;
   // Add images and model names
+  let index=0;
   selected.forEach((laptop) => {
     // Add image
-    imagesRow.innerHTML += `
+    var temp= `
       <img src="${laptop.imageURL}" 
            alt="${laptop.model}" 
            class="comparison-image">`;
-
+           
+    
     // Add model name
     modelsRow.innerHTML += `
       <th>
-        <div>${laptop.brand}</div>
+        <div>${temp}${laptop.brand}</div>
         <div>${laptop.model}</div>
       </th>`;
+      index++;
   });
 
   // Comparison rows (same features array as before)
@@ -758,9 +765,30 @@ document.querySelector(".close-comparison").addEventListener("click", () => {
   // Loop through each checkbox and set display to "none"
   checkboxes.forEach((checkbox) => {
     checkbox.style.display = "none";
-    checkbox.checked = false;         // Untick the checkbox
- 
+    checkbox.checked = false; // Untick the checkbox
   });
   updateCompareButton();
   document.getElementById("comparisonModal").style.display = "none";
 });
+
+document.getElementById("crawlButton").addEventListener("click", function () {
+  // Get the brand from your modal (assuming it's stored in modalBrand)
+  const brand = document.getElementById("modalBrand").textContent;
+
+  // URL encode the brand and create query parameter
+  const queryParams = new URLSearchParams({
+    company: encodeURIComponent(brand.toLowerCase()), // example: 'dell'
+  }).toString();
+
+  // Open new window with query parameters
+  window.open(`../CrawlPage/CrawlPage.html?${queryParams}`, "_blank");
+});
+
+function clearFilters() {
+  // Reset all select elements
+  document.querySelectorAll("#filterPanel select").forEach((select) => {
+    select.value = "";
+  });
+
+  // showNotification("All filters have been cleared!");
+}

@@ -7,8 +7,8 @@ async function postData(path, data) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data), // Send the data as JSON
-      mode: "cors", // Ensure the request is sent with CORS mode enabled
+      body: JSON.stringify(data), 
+      mode: "cors", 
     });
 
     if (!response.ok) {
@@ -16,10 +16,10 @@ async function postData(path, data) {
     }
 
     const responseData = await response.json();
-    console.log(responseData); // Handle the response data here
+    console.log(responseData); 
     return responseData;
   } catch (error) {
-    console.error("Error:", error); // Handle any errors here
+    console.error("Error:", error); 
   }
 }
 
@@ -30,7 +30,7 @@ async function fetchData(path) {
       headers: {
         "Content-Type": "application/json",
       },
-      mode: "cors", // Ensure the request is sent with CORS mode enabled
+      mode: "cors", 
     });
 
     if (!response.ok) {

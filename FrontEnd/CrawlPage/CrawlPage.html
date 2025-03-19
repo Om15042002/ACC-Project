@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crawl Results</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./CrawlPage.css" />
+    <link rel="stylesheet" href="../NotificationBar/Notification.css" />
+  </head>
+  <body>
+    <a href="../HomePage/HomePage.html" class="home-icon">
+      <i class="fas fa-home"></i>
+    </a>
+    <div class="crawl-page">
+      <div class="url-display" id="baseurl">
+        Base URL: <span id="baseUrl"></span>
+      </div>
+      <div class="url-display">Crawled URLs: <span id="urlCount"></span></div>
+      <div class="search-container">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search crawled content..."
+        />
+        <button id="searchButton"><i class="fas fa-search"></i></button>
+      </div>
+      <div class="url-list" id="urlList"></div>
+
+      <button class="extract-button" id="extractData">
+        <i class="fas fa-database"></i> Show Validation Entities
+      </button>
+
+      <div class="validation-cards" id="validationCards"></div>
+    </div>
+    <div class="loading-overlay" id="loadingOverlay">
+      <div class="spinner"></div>
+    </div>
+    <div class="notification" id="notification">
+      <div class="notification-content">
+        <span id="notification-message"></span>
+        <div class="notification-progress">
+          <div class="notification-progress-bar"></div>
+        </div>
+      </div>
+    </div>
+    <script></script>
+    <script src="./CrawlPage.js" defer></script>
+    <script src="../ServiceFiles/BackendInteraction.js" defer></script>
+    <script src="../NotificationBar/Notification.js" defer></script>
+  </body>
+</html>

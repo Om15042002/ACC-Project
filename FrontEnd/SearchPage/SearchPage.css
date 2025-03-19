@@ -211,7 +211,7 @@ body {
   border-radius: 4px;
 }
 
-.recommend-btn {
+/* .recommend-btn {
   background: #2a9d8f;
   color: white;
   padding: 12px 20px;
@@ -220,11 +220,11 @@ body {
   cursor: pointer;
   width: 100%;
   margin-top: 15px;
-}
+} */
 
-.recommend-btn:hover {
+/* .recommend-btn:hover {
   background: #228075;
-}
+} */
 
 .close-btn {
   position: absolute;
@@ -1215,4 +1215,52 @@ body {
   #modalImage {
       max-height: 200px;
   }
+}
+
+.crawl-button {
+  background: #2a9d8f;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+  transition: background 0.3s;
+}
+
+.crawl-button:hover {
+  background: #22867a;
+}
+
+.button-container {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.clear-btn {
+  background: #e74c3c;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.clear-btn:hover {
+  background: #c0392b;
+  transform: translateY(-2px);
+}
+
+.recommend-btn {
+  /* Modify existing recommend button styles */
+  flex-grow: 1;
+  padding: 12px 25px;
 }

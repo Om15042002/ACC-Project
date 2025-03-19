@@ -3,17 +3,16 @@ package com.LaptopRecommendationSystem.Backend.API.Controller;
 
 import com.LaptopRecommendationSystem.Backend.API.Config.CSVFileConfig;
 import com.LaptopRecommendationSystem.Backend.API.Config.JSONFileConfig;
-import com.LaptopRecommendationSystem.Backend.API.Model.FilterDetails;
-import com.LaptopRecommendationSystem.Backend.API.Model.LaptopDetail;
+import com.LaptopRecommendationSystem.Backend.API.Model.*;
 import com.LaptopRecommendationSystem.Backend.API.ResourceFiles.StringConstants;
-import com.LaptopRecommendationSystem.Backend.API.Services.AlternateSuggestions;
-import com.LaptopRecommendationSystem.Backend.API.Services.SearchFrequency;
-import com.LaptopRecommendationSystem.Backend.API.Services.WordCompletion;
+import com.LaptopRecommendationSystem.Backend.API.Services.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -28,9 +27,15 @@ import static com.LaptopRecommendationSystem.Backend.API.Services.WordCompletion
 public class LaptopController {
 
     private final List<LaptopDetail> laptops;
+    private final CrawlService crawlService;
+    private final SearchTrieService searchService;
 
-    public LaptopController() {
+    @Autowired
+    public LaptopController(CrawlService crawlService, SearchTrieService searchService) {
         this.laptops = JSONFileConfig.readJsonFile();
+        this.crawlService = crawlService;
+        this.searchService = searchService;
+
     }
 
     @GetMapping("/laptops")
@@ -147,6 +152,7 @@ public class LaptopController {
         return tracker.getTopSearches(10);
     }
 
+
     @GetMapping("/laptops/searchFrequency/{word}")
     public Integer getSearchFrequencyofWord(@PathVariable String word) throws IOException {
         String searchTerm = word.trim().toLowerCase();
@@ -174,5 +180,60 @@ public class LaptopController {
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(filtered);
+    }
+
+    @GetMapping("/laptop/crawl")
+    public CrawlResponse crawlWebsite(@RequestParam String company) {
+        String folderPath;
+
+        switch (company.toLowerCase()) {
+            case "dell":
+                folderPath = "C:\\Users\\Admin\\Desktop\\ACC Project\\Backend\\src\\main\\java\\com\\LaptopRecommendationSystem\\Backend\\API\\ResourceFiles\\HTMLTXTFILES\\DELL";
+                break;
+            case "apple":
+                folderPath = "C:\\Users\\Admin\\Desktop\\ACC Project\\Backend\\src\\main\\java\\com\\LaptopRecommendationSystem\\Backend\\API\\ResourceFiles\\HTMLTXTFILES\\APPLE";
+                break;
+            case "asus":
+                folderPath = "C:\\Users\\Admin\\Desktop\\ACC Project\\Backend\\src\\main\\java\\com\\LaptopRecommendationSystem\\Backend\\API\\ResourceFiles\\HTMLTXTFILES\\ASUS";
+                break;
+            case "lenovo":
+                folderPath = "C:\\Users\\Admin\\Desktop\\ACC Project\\Backend\\src\\main\\java\\com\\LaptopRecommendationSystem\\Backend\\API\\ResourceFiles\\HTMLTXTFILES\\LENOVO";
+                break;
+            case "hp":
+                folderPath = "C:\\Users\\Admin\\Desktop\\ACC Project\\Backend\\src\\main\\java\\com\\LaptopRecommendationSystem\\Backend\\API\\ResourceFiles\\HTMLTXTFILES\\HP";
+                break;
+            default:
+                folderPath = "C:\\Users\\Admin\\Desktop\\TempTxt\\Default";
+        }
+
+        return crawlService.processCompanyFiles(folderPath, company);
+    }
+
+    @GetMapping("/laptops/frequentCount")
+    public ResponseEntity<FrequentCountResponse> searchDocuments(
+            @RequestParam String query
+    ) {
+        List<TrieSearchResult> trieSeachresults = searchService.search(query);
+        List<String> brands = trieSeachresults.stream()
+                .map(item -> {
+                    // Split the path by '/' and take the first segment
+                    int firstSlashIndex = item.getUrl().indexOf('/');
+                    if (firstSlashIndex == -1) return item.getUrl();  // Handle case without slash
+                    return item.getUrl().substring(0, firstSlashIndex);
+                })
+                .distinct()  // Get unique brand names
+                .collect(Collectors.toList());
+
+        List<CrawlResponse> lstCrwalResponse = new ArrayList<>();
+//        for (String brand : brands) {
+//            lstCrwalResponse.add(crawlWebsite(brand));
+//        }
+
+        FrequentCountResponse objResponse = new FrequentCountResponse();
+        objResponse.setBrand(brands);
+        objResponse.setLstTrieSearchResult(trieSeachresults);
+
+        return ResponseEntity.ok(objResponse);
+
     }
 }
